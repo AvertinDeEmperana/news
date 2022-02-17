@@ -1,0 +1,58 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+
+/*
+class GroupScreen extends StatelessWidget {
+  final String id;
+  const GroupScreen({Key? key, @PathParam('id') required this.id}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: AutoTabsRouter(
+        routes: const [
+          GroupTab1Router(),
+          GroupTab2Router(),
+          GroupTab3Router(),
+        ],
+        duration: const Duration(milliseconds: 400),
+        builder: (context, child, animation) {
+          final tabsRouter = context.tabsRouter;
+          return Scaffold(
+              body: FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+              bottomNavigationBar: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
+                ),
+                child: buildBottomNavigationBar(context, tabsRouter),
+              )
+          );
+        },
+      ),
+    );
+  }
+}
+
+BottomNavigationBar buildBottomNavigationBar(BuildContext context, TabsRouter tabsRouter) {
+  return BottomNavigationBar(
+    backgroundColor: const Color(0xFF1A1A1A),
+    onTap: tabsRouter.setActiveIndex,
+    currentIndex: tabsRouter.activeIndex,
+    iconSize: 22,
+    selectedFontSize: 12,
+    unselectedFontSize: 12,
+    selectedItemColor: Colors.white,
+    unselectedItemColor: Colors.grey,
+    items: const [
+      BottomNavigationBarItem(activeIcon: Icon(Icons.home_rounded), icon: Icon(Icons.home_outlined), label: 'Accueil' ),
+      BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Rechercher'),
+      BottomNavigationBarItem(activeIcon: Icon(Icons.bookmark), icon: Icon(Icons.bookmark_border_outlined), label: 'Enregistrés'),
+    ],
+  );
+
+
+ */
