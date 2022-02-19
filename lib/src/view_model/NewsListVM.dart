@@ -10,8 +10,11 @@ class NewsListVM extends ChangeNotifier {
   int page = 1;
   List<Article> articles = [];
   int totalResults = 0;
+  bool isQuerying = false;
 
   ApiResponse<Result> result = ApiResponse.loading();
+  ApiResponse<Result> otherResult = ApiResponse.loading();
+
 
   Future<void> _setResult(ApiResponse<Result> response) async {
     result = response;
@@ -30,7 +33,8 @@ class NewsListVM extends ChangeNotifier {
   }
 
   Future<void> updateListIfNewDataFetched() async{
-    result = ApiResponse.loading();
+    print("Valeur de page ::: $page");
+    isQuerying = true;
     notifyListeners();
     _repo
         .getEverythingNewsList(page)
@@ -39,9 +43,9 @@ class NewsListVM extends ChangeNotifier {
   }
 
   void updateArticlesList(ApiResponse<Result> response){
-    result = response;
-    articles.addAll(result.data!.articles);
-    //notifyListeners();
-    print(articles.length);
+    otherResult = response;
+    articles.addAll(otherResult.data!.articles);
+    notifyListeners();
+    print("Nouvelle taille de la liste d'article : ${articles.length}");
   }
 }
