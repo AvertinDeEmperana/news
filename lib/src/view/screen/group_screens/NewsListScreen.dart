@@ -29,15 +29,15 @@ class _NewsListScreenState extends State<NewsListScreen> {
       body: ChangeNotifierProvider<NewsListVM>(
         create: (BuildContext context) => viewModel,
         child: Consumer<NewsListVM>(builder: (context, viewModel, _) {
-          switch (viewModel.result.status) {
-            case Status.LOADING:
-              return const ShimmerNewsListWidget();
-            case Status.ERROR:
-              return ErrorWidget(viewModel.result.message ?? "Pas de données");
-            case Status.COMPLETED:
-              return NewsListWidget(theNewsVM: viewModel);
-            default:
-          }
+            switch (viewModel.result.status) {
+                case Status.LOADING:
+                    return const ShimmerNewsListWidget();
+                case Status.ERROR:
+                    return ErrorWidget(viewModel.result.message ?? "Pas de données");
+                case Status.COMPLETED:
+                    return NewsListWidget(theNewsVM: viewModel);
+               default:
+            }
           return Container();
         }),
       ),
