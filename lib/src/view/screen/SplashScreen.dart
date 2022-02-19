@@ -43,19 +43,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   startTime() {
     Duration dur = const Duration(milliseconds: 3500);
-    return Timer(dur, showSecondScreen);
-  }
-  /*startTime() {
-    Duration dur = new Duration(milliseconds: 3500);
     return Timer(dur, showNewsListPage);
-  }*/
-
-  /*showNewsListPage() {
-    context.router.replace(GroupScreenRoute(id: '1'));
-  }*/
-
-  showSecondScreen() {
-    context.router.replace(const SecondScreenRoute());
   }
 
+  showNewsListPage() {
+    context.router.replace(GroupScreenRoute(id: '1'));
+  }
 }

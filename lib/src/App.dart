@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'App_Theme.dart';
 import 'Routes.gr.dart';
 
 class App extends StatefulWidget {
@@ -15,6 +16,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: true,
+      theme: AppTheme.lightTheme,
       title: "Your news App",
       routerDelegate: widget._appRouter.delegate(),
       routeInformationParser: widget._appRouter.defaultRouteParser(),
