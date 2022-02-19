@@ -1,58 +1,61 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:news/src/view/screen/SecondScreen.dart';
+import 'package:news/src/view/screen/NewsDetailsScreen.dart';
 import 'package:news/src/view/screen/SplashScreen.dart';
+import 'package:news/src/view/screen/group_screens/GroupScreen.dart';
+import 'package:news/src/view/screen/group_screens/NewsListScreen.dart';
+import 'package:news/src/view/screen/group_screens/SavedNewsScreen.dart';
+import 'package:news/src/view/screen/group_screens/SearchScreen.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route,Screen',
   routes: <AutoRoute>[
     AutoRoute(path: 'splash', page: SplashScreen, initial: true),
-    AutoRoute(path: 'second', page: SecondScreen),
-    /*AutoRoute(path: 'newsdetails', page: NewsDetail),
-    groupTabRouter,*/
+    AutoRoute(path: 'newsdetails/:article', page: NewsDetailsScreen),
+    groupTabRouter,
   ],
 )
 
 class $AppRouter {}
 
-/*const groupTabRouter = AutoRoute(
+const groupTabRouter = AutoRoute(
     path: 'group/:id',
     page: GroupScreen,
     children: [
       AutoRoute(
         path: 'tab1',
-        name: 'GroupTab1Router',
+        name: 'NewsListRouter',
         page: EmptyRouterPage,
         children: [
           AutoRoute(
             path: '',
-            page: NewsList,
+            page: NewsListScreen,
           ),
           RedirectRoute(path: '*', redirectTo: ''),
         ],
       ),
       AutoRoute(
         path: 'tab2',
-        name: 'GroupTab2Router',
+        name: 'SearchRouter',
         page: EmptyRouterPage,
         children: [
           AutoRoute(
               path: '',
-              page: Tab2Screen
+              page: SearchScreen
           ),
           RedirectRoute(path: '*', redirectTo: ''),
         ],
       ),
       AutoRoute(
         path: 'tab3',
-        name: 'GroupTab3Router',
+        name: 'SavedNewsRouter',
         page: EmptyRouterPage,
         children: [
           AutoRoute(
               path: '',
-              page: Tab3Screen
+              page: SavedNewsScreen
           ),
           RedirectRoute(path: '*', redirectTo: ''),
         ],
       ),
     ]
-);*/
+);

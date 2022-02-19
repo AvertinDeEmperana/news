@@ -1,16 +1,27 @@
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
+import 'dart:io';
 
 import 'BaseApi.dart';
 
 class NewsApiService extends BaseApiService {
 
   @override
-  Future getResponse(String url) async {
+  //Future getResponse(String url) async {
+  Future getResponse(int page) async {
     dynamic responseJson;
-    Dio dio = Dio();
+    // dio = Dio();
+    Dio dio = Dio(
+      BaseOptions(
+        baseUrl: baseUrl,
+        connectTimeout: 5000,
+        receiveTimeout: 10000,
+      )
+    );
     try{
-      Response response = await dio.get("$baseUrl/$url&apiKey=$apiKey");
+      //Response response = await dio.get(url+"?country=fr&apiKey=$apiKey");
+      //https://newsapi.org/v2/
+      Response response = await dio.get("top-headlines?apiKey=$apiKey&country=fr&page=$page");
       responseJson = response.data;
     }on DioError catch(e) {
       if (kDebugMode) {
@@ -21,7 +32,9 @@ class NewsApiService extends BaseApiService {
   }
 }
 
-/*class ApiInterceptors extends Interceptor {
+
+
+class ApiInterceptors extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
 
@@ -36,4 +49,4 @@ class NewsApiService extends BaseApiService {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
 
   }
-}*/
+}
