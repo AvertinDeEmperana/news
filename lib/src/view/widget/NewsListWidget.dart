@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../data/api/Status.dart';
-import '../../model/Article.dart';
 import '../../view_model/NewsListVM.dart';
 import 'SingleArticleWidget.dart';
 
@@ -16,12 +16,20 @@ class NewsListWidget extends StatefulWidget {
 
 class _NewsListWidgetState extends State<NewsListWidget> {
   ScrollController theScrollController = ScrollController();
-  //List<Article> articles = [];
   bool isLoading = false;
   bool allLoaded = false;
 
   loadMoreData() async{
       if(allLoaded){
+          Fluttertoast.showToast(
+              msg: "Tous les articles ont été chargé",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black87,
+              textColor: Colors.white,
+              fontSize: 16.0
+          );
           return;
       }
       setState(()  {
@@ -29,8 +37,7 @@ class _NewsListWidgetState extends State<NewsListWidget> {
       });
       widget.theNewsVM.page++;
       await widget.theNewsVM.updateListIfNewDataFetched();
-      await Future.delayed(const Duration(seconds: 3));
-      //articles.addAll(widget.theNewsVM.articles);
+      await Future.delayed(const Duration(seconds: 2));
       setState(() {
           isLoading = false;
           allLoaded = widget.theNewsVM.articles.length == widget.theNewsVM.totalResults;
@@ -40,21 +47,9 @@ class _NewsListWidgetState extends State<NewsListWidget> {
   @override
   void initState() {
       super.initState();
-      //articles.addAll(widget.theNewsVM.articles);
       theScrollController.addListener(() async {
-          if(theScrollController.position.pixels == theScrollController.position.maxScrollExtent) {
-              if (widget.theNewsVM.articles.length < widget.theNewsVM.totalResults){
-                  if(widget.theNewsVM.result.status == Status.COMPLETED){
-                      {
-                          loadMoreData();
-                      }
-                  }
-              }
-              /*Timer(const Duration(seconds: 3), () {
-                  setState(() {
-                      _isContainerVisible = false;
-                  });
-              });*/
+          if(theScrollController.position.pixels == theScrollController.position.maxScrollExtent && (widget.theNewsVM.result.status == Status.COMPLETED)){
+              loadMoreData();
           }
       });
   }
@@ -76,7 +71,7 @@ class _NewsListWidgetState extends State<NewsListWidget> {
             child: RichText(
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
-                text: 'A la une',
+                text: 'Actualités',
                 style: Theme.of(context).textTheme.headline1,
                 children: const <TextSpan>[
                   TextSpan(text: '.', style: TextStyle(fontSize: 44)),
@@ -91,23 +86,7 @@ class _NewsListWidgetState extends State<NewsListWidget> {
                       controller: theScrollController,
                       physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                       itemCount: widget.theNewsVM.articles.length,
-                      //itemCount: articles.length + (allLoaded? 1:0),
-                      //itemBuilder: ((context, index) => SingleArticleWidget(article: widget.theNewsVM.articles[index]))
-                      itemBuilder: ((context, index) {
-                        if(index < widget.theNewsVM.articles.length-1){
-                            return SingleArticleWidget(article: widget.theNewsVM.articles[index]);
-                        }
-                        else{
-                            return SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                height: 50,
-                                child: const Center(
-                                    child: Text("Plus aucune données à afficher")
-                                ),
-                            );
-                        }
-
-                      })
+                      itemBuilder: ((context, index) => SingleArticleWidget(article: widget.theNewsVM.articles[index], theNewsListVM: widget.theNewsVM))
                   ),
                   if(isLoading)...[
                     Positioned(
