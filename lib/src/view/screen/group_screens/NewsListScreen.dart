@@ -1,9 +1,8 @@
-import 'dart:async';
+//import 'dart:async';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/foundation.dart';
+//import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 import 'package:news/src/view/widget/ShimmerNewsListWidget.dart';
 import 'package:news/src/view_model/NewsListVM.dart';
 import 'package:provider/provider.dart';
@@ -20,26 +19,26 @@ class NewsListScreen extends StatefulWidget {
 }
 
 class _NewsListScreenState extends State<NewsListScreen> {
-  ConnectivityResult _connectionStatus = ConnectivityResult.none;
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
-  final Connectivity _connectivity = Connectivity();
+  //ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  //late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  //final Connectivity _connectivity = Connectivity();
   final NewsListVM viewModel = NewsListVM();
 
   @override
   void initState() {
       super.initState();
       viewModel.fetchEverythingNews();
-      initConnectivity();
-      _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+      //initConnectivity();
+      //_connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   @override
   void dispose() {
-    _connectivitySubscription.cancel();
+    //_connectivitySubscription.cancel();
     super.dispose();
   }
 
-  Future<void> initConnectivity() async {
+  /*Future<void> initConnectivity() async {
       late ConnectivityResult result;
       try{
             result = await _connectivity.checkConnectivity();
@@ -57,13 +56,13 @@ class _NewsListScreenState extends State<NewsListScreen> {
           return Future.value(null);
       }
       return _updateConnectionStatus(result);
-  }
+  }*/
 
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+  /*Future<void> _updateConnectionStatus(ConnectivityResult result) async {
       setState(() {
         _connectionStatus = result;
       });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {

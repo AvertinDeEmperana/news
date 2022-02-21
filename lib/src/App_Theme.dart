@@ -41,6 +41,7 @@ class AppTheme {
     headline1: _lightOnPrimaryScreenHeadingTextStyle,
     caption: _lightOnPrimaryCaptionTextStyle,
     headline6: _lightOnPrimaryArticleTitleTextStyle, //Article Title
+    bodyText2: _lightOnPrimaryBodyTextStyle
   );
 
   static const TextStyle _lightOnPrimaryScreenHeadingTextStyle = TextStyle(
@@ -56,6 +57,12 @@ class AppTheme {
   static const TextStyle _lightOnPrimaryCaptionTextStyle = TextStyle(
       fontSize: 12.0,
       color: _lightMutedOnPrimaryColor,
+      fontWeight: FontWeight.normal);
+
+  static const TextStyle _lightOnPrimaryBodyTextStyle = TextStyle(
+      fontSize: 16.0,
+      letterSpacing: 0.2,
+      color: _lightSecondaryColor,
       fontWeight: FontWeight.normal);
 
 }
