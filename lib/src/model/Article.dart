@@ -1,7 +1,11 @@
+import 'package:objectbox/objectbox.dart';
 import 'Source.dart';
 
+@Entity()
 class Article {
-  late final Source? source;
+  @Id()
+  late final int id = 0;
+  late Source source = ToOne<Source>() as Source;
   late final String? author;
   late final String? title;
   late final String? description;
@@ -21,20 +25,5 @@ class Article {
     urlToImage = json['urlToImage'] ?? "";
     publishedAt = json['publishedAt'] ?? "";
     content = json['content'] ?? "";
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (source != null) {
-      data['source'] = source!.toJson();
-    }
-    data['author'] = author;
-    data['title'] = title;
-    data['description'] = description;
-    data['url'] = url;
-    data['urlToImage'] = urlToImage;
-    data['publishedAt'] = publishedAt;
-    data['content'] = content;
-    return data;
   }
 }
