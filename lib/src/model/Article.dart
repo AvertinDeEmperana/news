@@ -10,10 +10,10 @@ class Article {
   late final String? publishedAt;
   late final String? content;
 
-  Article({required this.source, required this.author, required this.title, required this.description, required this.url, required this.urlToImage, required this.publishedAt, required this.content, });
+  Article({required source, required author, required title, required description, required url, required urlToImage, required publishedAt, required content});
 
   Article.fromJson(Map<String, dynamic> json){
-    source = Source.fromJson(json['source'] ?? "");
+    source = Source.fromJson(json['source'] ?? Source(id: "", name: ""));
     author = json['author'] ?? "";
     title = json['title'] ?? "";
     description = json['description'] ?? "";
@@ -21,5 +21,20 @@ class Article {
     urlToImage = json['urlToImage'] ?? "";
     publishedAt = json['publishedAt'] ?? "";
     content = json['content'] ?? "";
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (source != null) {
+      data['source'] = source!.toJson();
+    }
+    data['author'] = author;
+    data['title'] = title;
+    data['description'] = description;
+    data['url'] = url;
+    data['urlToImage'] = urlToImage;
+    data['publishedAt'] = publishedAt;
+    data['content'] = content;
+    return data;
   }
 }
