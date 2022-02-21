@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news/src/view_model/NewsListVM.dart';
-import 'package:provider/provider.dart';
 
 import 'App_Theme.dart';
 import 'Routes.gr.dart';
