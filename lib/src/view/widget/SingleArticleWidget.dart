@@ -34,7 +34,7 @@ class SingleArticleWidget extends StatelessWidget {
               width: 110,
               height: 110,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(5)),
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
                 image: DecorationImage(
                   image: Util.articleImage(article.urlToImage),
                   fit: BoxFit.cover,
@@ -45,7 +45,7 @@ class SingleArticleWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
               width: 250,
-              height: 90,
+              height: 100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
