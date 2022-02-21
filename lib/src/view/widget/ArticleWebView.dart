@@ -1,9 +1,9 @@
-import 'dart:io';
+//import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+//import 'package:flutter/material.dart';
+//import 'package:webview_flutter/webview_flutter.dart';
 
-class ArticleWebView extends StatefulWidget {
+/*class ArticleWebView extends StatefulWidget {
   final String url;
   const ArticleWebView({Key? key, required this.url}) : super(key: key);
 
@@ -25,4 +25,4 @@ class ArticleWebViewState extends State<ArticleWebView> {
       initialUrl: widget.url,
     );
   }
-}
+}*/

@@ -50,9 +50,9 @@ class AppTheme {
       letterSpacing: 1,
       fontWeight: FontWeight.w500);
   static const TextStyle _lightOnPrimaryArticleTitleTextStyle = TextStyle(
-      fontSize: 16.0,
+      fontSize: 18.0,
       color: _lightOnPrimaryArticleTitleColor,
-      letterSpacing: 0,
+      letterSpacing: 0.1,
       fontWeight: FontWeight.bold);
   static const TextStyle _lightOnPrimaryCaptionTextStyle = TextStyle(
       fontSize: 12.0,
@@ -63,6 +63,6 @@ class AppTheme {
       fontSize: 16.0,
       letterSpacing: 0.2,
       color: _lightSecondaryColor,
-      fontWeight: FontWeight.normal);
+      fontWeight: FontWeight.w500);
 
 }

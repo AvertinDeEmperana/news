@@ -43,9 +43,9 @@ BottomNavigationBar buildBottomNavigationBar(BuildContext context, TabsRouter ta
     backgroundColor: const Color(0xFF1A1A1A),
     onTap: tabsRouter.setActiveIndex,
     currentIndex: tabsRouter.activeIndex,
-    iconSize: 22,
-    selectedFontSize: 12,
-    unselectedFontSize: 12,
+    iconSize: 25,
+    selectedFontSize: 13,
+    unselectedFontSize: 13,
     selectedItemColor: Colors.white,
     unselectedItemColor: Colors.grey,
     items: const [

@@ -99,7 +99,7 @@ class NewsListCarousel extends StatelessWidget {
       options: CarouselOptions(
         height: 280,
         aspectRatio: 16/9,
-        autoPlay: true,
+        autoPlay: false,
         enlargeCenterPage: true,
         autoPlayCurve: Curves.fastOutSlowIn,
         enableInfiniteScroll: true,
