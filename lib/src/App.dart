@@ -32,7 +32,6 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final NewsListVM nlVM = NewsListVM();
-  final SavedNewsVM snVM = SavedNewsVM();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -41,9 +40,7 @@ class _AppState extends State<App> {
             nlVM.fetchTopHeadlinesNews();
             return nlVM;
           }),
-        ChangeNotifierProvider<SavedNewsVM>(create: (BuildContext context) {
-          return snVM;
-        })
+          ChangeNotifierProvider<SavedNewsVM>(create: (BuildContext context) => SavedNewsVM()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: true,

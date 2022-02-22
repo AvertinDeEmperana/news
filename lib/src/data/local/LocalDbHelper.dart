@@ -1,16 +1,35 @@
-
 import 'package:news/src/data/local/Entities/ArticleEntity.dart';
 
 import '../../../objectbox.g.dart';
 import '../../model/Article.dart';
 
 class LocalDbHelper {
+
+
     static Future<int> saveArticle(Article article) async {
+        if(await theDbContainsArticle(article) == false)
+        {
+            var store = await openStore();
+            var box = store.box<ArticleEntity>();
+            var id = box.put(article.toEntity());
+            store.close();
+            return id;
+        }
+        return -200;
+    }
+
+    static Future<bool> theDbContainsArticle(Article article) async {
         var store = await openStore();
         var box = store.box<ArticleEntity>();
-        var id = box.put(article.toEntity());
+        if((box.query(ArticleEntity_.id.equals(article.id)).build().findFirst() != null)
+            || (box.query(ArticleEntity_.title.equals(article.title)).build().findFirst() != null)
+            )
+        {
+            store.close();
+            return true;
+        }
         store.close();
-        return id;
+        return false;
     }
 
     static Future<bool> deleteArticle(String title) async {
@@ -49,29 +68,11 @@ class LocalDbHelper {
       return articles;
     }
 
-    static Future<List<Article>> getTwentyArticles(int page) async {
-
-      var store = await openStore();
-      var box = store.box<ArticleEntity>();
-      //var articlesEntities = box.query().build();
-      var articlesEntities = box.getAll();
-      var articles = articlesEntities.map((e) => e.toArticle()).toList();
-      /*List<Article> articles = [];
-      for (var elem in articlesEntities) {
-          articles.add(elem.toArticle());
-      }*/
-      /*for (var elem in articlesEntities) {
-        articles.add(elem.toArticle());
-      }*/
-      //var articles = articlesEntities.map((e) => e.toArticle()).toList();
-      store.close();
-      return articles;
-    }
-
     static Future<int> getAllArticlesCount() async {
         var store = await openStore();
         var box = store.box<ArticleEntity>();
+        int size = box.getAll().length;
         store.close();
-        return box.count();
+        return size;
     }
 }

@@ -23,8 +23,8 @@ class NewsRepository implements Repository {
         }
     }
 
-      @override
-      Future<Result?> getEverythingNewsList(int page) {
-        throw UnimplementedError();
-      }
+    @override
+    Future<Result?> getEverythingNewsList(int page) {
+      throw UnimplementedError();
+    }
 }

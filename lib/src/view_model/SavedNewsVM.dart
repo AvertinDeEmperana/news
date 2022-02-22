@@ -5,18 +5,24 @@ import '../model/Article.dart';
 
 class SavedNewsVM extends ChangeNotifier {
   int page = 1;
-
   List<Article> localDbArticles = [];
   var status = Status.COMPLETED;
-  late int totalResults;
+  late int totalResults = 0;
   late Article currentArticle;
+  bool isSaved = false;
 
   Future<void> loadArticles() async {
     var articles = await LocalDbHelper.getAllArticles();
     if(articles.isNotEmpty){
-      localDbArticles.addAll(articles);
-      status = Status.COMPLETED;
-      notifyListeners();
+      for(var article in articles){
+          if(localDbArticles.contains(article)){}
+          else{
+              localDbArticles.add(article);
+              status = Status.COMPLETED;
+              getAllSavedArticleCount();
+              notifyListeners();
+          }
+      }
     }
     else{
       status = Status.NOTFOUND;
@@ -26,13 +32,24 @@ class SavedNewsVM extends ChangeNotifier {
 
   Future<int> saveArticle() async{
     var articleID = await LocalDbHelper.saveArticle(currentArticle);
-    getAllSavedArticleCount();
-    return articleID;
+    if(articleID == -200) {
+      return -200;
+    }
+    else{
+      isSaved = true;
+      totalResults++;
+      notifyListeners();
+      return articleID;
+    }
   }
 
   Future<bool> deleteArticle(int i) async{
     bool isDeleted = await LocalDbHelper.deleteArticleWithId(i);
-    getAllSavedArticleCount();
+    if(isDeleted){
+        isSaved = false;
+        totalResults--;
+        notifyListeners();
+    }
     return isDeleted;
   }
 
@@ -45,13 +62,9 @@ class SavedNewsVM extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getTwentyArticles() async {
-    await getAllSavedArticleCount();
-      if(localDbArticles.length == totalResults){
-          return;
-      }
-      var articles = await LocalDbHelper.getTwentyArticles(page);
-      localDbArticles.addAll(articles);
+  Future<void> checkSavedStatus() async {
+    isSaved = await LocalDbHelper.theDbContainsArticle(currentArticle);
+    notifyListeners();
   }
 
 }

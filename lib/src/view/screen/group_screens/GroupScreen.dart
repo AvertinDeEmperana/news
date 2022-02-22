@@ -7,6 +7,7 @@ class GroupScreen extends StatelessWidget {
   final String id;
   const GroupScreen({Key? key, @PathParam('id') required this.id}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

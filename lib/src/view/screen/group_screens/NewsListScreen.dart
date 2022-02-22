@@ -27,9 +27,8 @@ class _NewsListScreenState extends State<NewsListScreen> {
   @override
   void initState() {
       super.initState();
-      /*NewsListVM tviewModel = Provider.of<NewsListVM>(context, listen: false);
-      viewModel = tviewModel;*/
-      //viewModel.fetchTopHeadlinesNews();
+      /*NewsListVM nlVM = Provider.of<NewsListVM>(context, listen: false);
+      nlVM.fetchTopHeadlinesNews();*/
       //initConnectivity();
       //_connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }

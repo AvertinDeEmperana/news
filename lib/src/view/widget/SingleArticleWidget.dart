@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../Routes.gr.dart';
 import '../../model/Article.dart';
 import '../../util/Util.dart';
-import '../../view_model/NewsListVM.dart';
 
 class SingleArticleWidget extends StatelessWidget {
   final Article article;
