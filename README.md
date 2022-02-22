@@ -1,16 +1,42 @@
 # news
 
-A news app made with flutter using newsapi.ord endpoints
+A news app made with flutter using newsapi.org endpoints. This app is a non profit project ;)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Usages
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Get recents news
+* Search for news and filter articles by category, languages, country or specific word
+* Save articles on local storage and consult them when the mobile device is offline
+* Consult an article page (original site web)
+* Share articles
+
+## Technologie 
+
+* Flutter 
+* Dart
+* Android Studio for developing
+* Invision Studio for mockups
+
+## Interesting packages used for this app
+
+* dio: An http client for and api requests
+* shimmer: for loading animation before fetching data
+* auto_route: used to generate routes for navigation
+* provider: for the state managment
+* share_plus: to share articles
+* objectbox: for data persistence
+
+## Installation
+
+To execute this app, you'll need an api key. You can get an api key for free if you register on newsapi.org. 
+
+The first step is to get the last version of flutter 2.10.2
+
+Then you can clone the project and move into the root directory
+
+
+
