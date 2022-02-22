@@ -80,14 +80,14 @@ class NewsListCarousel extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 5,),
-                              Text(Util.articleText(theNewsListVM.articles[index].source?.name) != "" ?
-                              (Util.articleText(theNewsListVM.articles[index].source!.name).length >= 15 ?
-                              Util.articleText(theNewsListVM.articles[index].source!.name).substring(0, 15) :
-                              Util.articleText(theNewsListVM.articles[index].source!.name)) :
+                              Text(Util.articleText(theNewsListVM.articles[index].source.name) != "" ?
+                              (Util.articleText(theNewsListVM.articles[index].source.name).length >= 15 ?
+                              Util.articleText(theNewsListVM.articles[index].source.name).substring(0, 15) :
+                              Util.articleText(theNewsListVM.articles[index].source.name)) :
                               'Source inconnue', style: Theme.of(context).textTheme.caption, overflow: TextOverflow.clip,),
                             ]
                         ),
-                        Text(theNewsListVM.articles[index].publishedAt != null ? theNewsListVM.articles[index].publishedAt!.substring(0, 10) : 'Il y a 15 minutes', style: Theme.of(context).textTheme.caption, overflow: TextOverflow.clip,),
+                        Text(theNewsListVM.articles[index].publishedAt != "" ? theNewsListVM.articles[index].publishedAt.substring(0, 10) : 'Il y a 15 minutes', style: Theme.of(context).textTheme.caption, overflow: TextOverflow.clip,),
                       ],
                     ),
                   ),
