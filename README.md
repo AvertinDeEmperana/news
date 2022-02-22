@@ -1,22 +1,13 @@
 # news
 
-A news app made with flutter using newsapi.org endpoints. This app is a non profit project ;)
+A news app made with flutter using newsapi.org endpoints. This app is a non profit project ;). 
+  
 
 ## App Screenshots
 
-<img src="https://user-images.githubusercontent.com/29286513/155227532-e6b0cc79-a0d3-4bcd-9581-4d59e53a3e1c.png" alt="Alt text" title="Optional title" style="display: inline-block; margin: 0 auto; max-width: 300px; max-height: 500px">
-
-<img src="https://user-images.githubusercontent.com/29286513/155227532-e6b0cc79-a0d3-4bcd-9581-4d59e53a3e1c.png" alt="Alt text" title="Optional title" style="display: inline-block; margin: 0 auto; max-width: 300px; max-height: 500px">
-
-<img src="https://user-images.githubusercontent.com/29286513/155227532-e6b0cc79-a0d3-4bcd-9581-4d59e53a3e1c.png" alt="Alt text" title="Optional title" style="display: inline-block; margin: 0 auto; max-width: 300px; max-height: 500px">
-
-
-
-
-
-## Getting Started
-
-
+<img width="930" alt="frame1" src="https://user-images.githubusercontent.com/29286513/155232878-af23572c-e0cb-409a-a141-fbfca8e56fed.PNG">
+<img width="925" alt="frame2" src="https://user-images.githubusercontent.com/29286513/155233062-6635917a-0d83-4cdf-a6c2-f55e063f20a6.PNG">
+<img width="423" alt="frame3" src="https://user-images.githubusercontent.com/29286513/155233117-64bd7047-8a8b-4039-84cf-df99836687e5.PNG">
 
 ## Usages
 
@@ -28,10 +19,14 @@ A news app made with flutter using newsapi.org endpoints. This app is a non prof
 
 ## Technologie 
 
-* Flutter 
+* Flutter   
 * Dart
 * Android Studio for developing
 * Invision Studio for mockups
+
+## Design patter: MVVM
+
+The key benefit is allowing true separation between the View and Model and the efficiency that you gain from having that. What it means in real terms is that when your model needs to change, it can be changed easily without the view needing to and vice-versa.
 
 ## Interesting packages used for this app
 
