@@ -38,6 +38,6 @@ class CustomErrorWidget extends StatelessWidget {
     }
 
   void updateData() async {
-      await theNewsVM.fetchEverythingNews();
+      await theNewsVM.fetchTopHeadlinesNews();
   }
 }

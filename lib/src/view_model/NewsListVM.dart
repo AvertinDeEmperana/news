@@ -24,10 +24,10 @@ class NewsListVM extends ChangeNotifier {
     //print("The fucking totalResults ${result.data!.totalResults}");
   }
 
-  Future<void> fetchEverythingNews() async {
+  Future<void> fetchTopHeadlinesNews() async {
     _setResult(ApiResponse.loading());
     _repo
-        .getEverythingNewsList(page)
+        .getTopHeadlinesNewsList(page)
         .then((value) => _setResult(ApiResponse.completed(value)))
         .onError((error, stackTrace) => _setResult(ApiResponse.error(error.toString())));
   }
@@ -37,7 +37,7 @@ class NewsListVM extends ChangeNotifier {
     isQuerying = true;
     notifyListeners();
     _repo
-        .getEverythingNewsList(page)
+        .getTopHeadlinesNewsList(page)
         .then((value) => updateArticlesList(ApiResponse.completed(value)))
         .onError((error, stackTrace) => _setResult(ApiResponse.error(error.toString())));
   }

@@ -23,16 +23,10 @@ class _SavedNewsScreenState extends State<SavedNewsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //_articles = loadData();
     SavedNewsVM tsnvm = Provider.of<SavedNewsVM>(context, listen: false);
     snVM = tsnvm;
     snVM.loadArticles();
   }
-
-  /*Future<List<Article>> loadData() async {
-      await snVM.getTwentyArticles();
-      return snVM.localDbArticles;
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -44,29 +38,9 @@ class _SavedNewsScreenState extends State<SavedNewsScreen> {
             case Status.LOADING:
               return const ShimmerNewsListWidget();
             case Status.NOTFOUND:
-              return const ArticlesNotFoundWidget(errorText: /*viewModel.result.message ?? */ "Une erreur est survenue. Balayer l'écran pour actualiser ");
+              return const ArticlesNotFoundWidget(errorText: "Une erreur est survenue. Balayer l'écran pour actualiser ");
             case Status.COMPLETED:
               return SavedNewsListWidget(articles: snVM.localDbArticles);
-              //return const Text("Done");
-              /*return FutureBuilder(
-                  future: _articles,
-                  builder: (BuildContext context, AsyncSnapshot<List<Article>> snapshot) {
-                      print(snapshot.connectionState);
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const ShimmerNewsListWidget();
-                      } else if (snapshot.connectionState == ConnectionState.done) {
-                        if (snapshot.hasError) {
-                          return const ArticlesNotFoundWidget(errorText: /*viewModel.result.message ?? */ "Une erreur est survenue. Balayer l'écran pour actualiser ");
-                        } else if (snapshot.hasData) {
-                          return NewsListWidget(articles: snapshot!.data);
-                        } else {
-                          return const Text('Empty data');
-                        }
-                      }else {
-                        return Text('State: ${snapshot.connectionState}');
-                      }
-                  }
-              );*/
             default:
           }
           return Container();

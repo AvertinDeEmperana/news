@@ -12,6 +12,7 @@ class Article {
   late final String content;
 
   Article({required this.source, required this.author, required this.title, required this.description, required this.url, required this.urlToImage, required this.publishedAt, required this.content});
+
   Article.fromEntity({required this.id, required this.source, required this.author, required this.title, required this.description, required this.url, required this.urlToImage, required this.publishedAt, required this.content});
 
   Article.fromJson(Map<String, dynamic> json){

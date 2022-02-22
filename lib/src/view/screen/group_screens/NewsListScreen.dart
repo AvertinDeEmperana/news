@@ -22,14 +22,14 @@ class _NewsListScreenState extends State<NewsListScreen> {
   //ConnectivityResult _connectionStatus = ConnectivityResult.none;
   //late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   //final Connectivity _connectivity = Connectivity();
-  NewsListVM viewModel = NewsListVM();
+  //NewsListVM viewModel = NewsListVM();
 
   @override
   void initState() {
       super.initState();
       /*NewsListVM tviewModel = Provider.of<NewsListVM>(context, listen: false);
       viewModel = tviewModel;*/
-      viewModel.fetchEverythingNews();
+      //viewModel.fetchTopHeadlinesNews();
       //initConnectivity();
       //_connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:news/src/data/local/LocalDbHelper.dart';
-import 'package:news/src/view/widget/NewsListCarousel.dart';
 import 'package:news/src/view_model/SavedNewsVM.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,7 +6,6 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../model/Article.dart';
 import '../../util/Util.dart';
-import '../../view_model/NewsListVM.dart';
 
 class NewsDetailsScreen extends StatefulWidget {
   final Article article;
@@ -24,12 +20,18 @@ class NewsDetailsScreen extends StatefulWidget {
 
 class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
-
-
   int savedNumber = -1;
+  SavedNewsVM snVM = SavedNewsVM();
+
+  @override
+  void initState() {
+    super.initState();
+    //SavedNewsVM tsnVM = Provider.of<SavedNewsVM>(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    SavedNewsVM snVM = Provider.of<SavedNewsVM>(context);
+    //SavedNewsVM snVM = Provider.of<SavedNewsVM>(context);
     double dWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         floatingActionButton: FloatingActionButton(
@@ -270,7 +272,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     savedNumber == -1 ? await _save() : await _delete();
   }
 
-  Future<void> _delete() async {
+  /*Future<void> _delete() async {
     if(await LocalDbHelper.deleteArticleWithId(savedNumber)){
       setState(() {
         savedNumber = -1;
@@ -283,9 +285,9 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     setState(() {
       savedNumber = articleID;
     });
-  }
+  }*/
 
-  /*Future<void> _delete() async {
+  Future<void> _delete() async {
     if(await snVM.deleteArticle(savedNumber)){
       setState(() {
         savedNumber = -1;
@@ -298,5 +300,5 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     setState(() {
       savedNumber = articleID;
     });
-  }*/
+  }
 }

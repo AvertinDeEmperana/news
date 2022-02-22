@@ -16,11 +16,11 @@ class FetchDataException extends AppException {
 }
 
 class BadRequestException extends AppException {
-  BadRequestException([message]) : super(message, "Invalid Request: ");
+  BadRequestException([message]) : super(message, "Requete invalide: ");
 }
 
 class UnauthorisedException extends AppException {
-  UnauthorisedException([message]) : super(message, "Unauthorised Request: ");
+  UnauthorisedException([message]) : super(message, "UNon autorisé: ");
 }
 
 class InvalidInputException extends AppException {

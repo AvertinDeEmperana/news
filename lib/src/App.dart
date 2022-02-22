@@ -38,7 +38,7 @@ class _AppState extends State<App> {
     return MultiProvider(
       providers: [
           ChangeNotifierProvider<NewsListVM>(create: (BuildContext context) {
-            nlVM.fetchEverythingNews();
+            nlVM.fetchTopHeadlinesNews();
             return nlVM;
           }),
         ChangeNotifierProvider<SavedNewsVM>(create: (BuildContext context) {
@@ -55,5 +55,4 @@ class _AppState extends State<App> {
     );
   }
 }
-
     
