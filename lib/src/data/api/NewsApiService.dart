@@ -27,7 +27,6 @@ class NewsApiService extends BaseApiService {
             if (kDebugMode) {
                 print(e);
             }
-            //responseJson = e;
         }on SocketException {
             throw FetchDataException('No Internet Connection');
         }
@@ -56,17 +55,9 @@ dynamic returnResponse(Response response) {
 
 class ApiInterceptors extends Interceptor {
     @override
-    void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-
-    }
-
+    void onRequest(RequestOptions options, RequestInterceptorHandler handler) {}
     @override
-    void onError(DioError err, ErrorInterceptorHandler handler) {
-
-    }
-
+    void onError(DioError err, ErrorInterceptorHandler handler) {}
     @override
-    void onResponse(Response response, ResponseInterceptorHandler handler) {
-
-    }
+    void onResponse(Response response, ResponseInterceptorHandler handler) {}
 }

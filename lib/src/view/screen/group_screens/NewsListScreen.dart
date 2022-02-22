@@ -8,7 +8,7 @@ import 'package:news/src/view_model/NewsListVM.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/api/Status.dart';
-import '../../widget/ErrorWidget.dart';
+import '../../widget/CustomErrorWidget.dart';
 import '../../widget/NewsListWidget.dart';
 
 class NewsListScreen extends StatefulWidget {
@@ -22,12 +22,14 @@ class _NewsListScreenState extends State<NewsListScreen> {
   //ConnectivityResult _connectionStatus = ConnectivityResult.none;
   //late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   //final Connectivity _connectivity = Connectivity();
-  final NewsListVM viewModel = NewsListVM();
+  //NewsListVM viewModel = NewsListVM();
 
   @override
   void initState() {
       super.initState();
-      viewModel.fetchEverythingNews();
+      /*NewsListVM tviewModel = Provider.of<NewsListVM>(context, listen: false);
+      viewModel = tviewModel;*/
+      //viewModel.fetchTopHeadlinesNews();
       //initConnectivity();
       //_connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
@@ -66,6 +68,7 @@ class _NewsListScreenState extends State<NewsListScreen> {
 
   @override
   Widget build(BuildContext context) {
+      NewsListVM viewModel = Provider.of<NewsListVM>(context);
       return Scaffold(
           body: ChangeNotifierProvider<NewsListVM>(
               create: (BuildContext context) => viewModel,
@@ -76,7 +79,7 @@ class _NewsListScreenState extends State<NewsListScreen> {
                       case Status.ERROR:
                           return CustomErrorWidget(theNewsVM: viewModel, errorText: /*viewModel.result.message ?? */ "Une erreur est survenue. Balayer l'écran pour actualiser ");
                       case Status.COMPLETED:
-                          return NewsListWidget(theNewsVM: viewModel);
+                          return NewsListWidget(articles: viewModel.articles,);
                      default:
                   }
                   return Container();

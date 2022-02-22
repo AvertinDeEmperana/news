@@ -8,21 +8,20 @@ import '../../view_model/NewsListVM.dart';
 
 class SingleArticleWidget extends StatelessWidget {
   final Article article;
-  final NewsListVM theNewsListVM;
-  const SingleArticleWidget({Key? key, required this.article, required this.theNewsListVM}) : super(key: key);
+  const SingleArticleWidget({Key? key, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
-    void openDetailPage(Article article, NewsListVM theNewsListVM) {
+    void openDetailPage(Article article) {
       context.router.push(
-          NewsDetailsScreenRoute(article: article, theNewsListVM: theNewsListVM)
+          NewsDetailsScreenRoute(article: article)
       );
     }
 
     return InkWell(
       enableFeedback: true,
-      onTap: () => openDetailPage(article, theNewsListVM),
+      onTap: () => openDetailPage(article),
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5.0),
@@ -49,11 +48,11 @@ class SingleArticleWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(Util.articleText(article.title), style: Theme.of(context).textTheme.headline6, overflow: TextOverflow.ellipsis, maxLines: 2,),
+                  Text(article.title, style: Theme.of(context).textTheme.headline6, overflow: TextOverflow.ellipsis, maxLines: 2,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(Util.articleText(article.source.name), style: Theme.of(context).textTheme.caption, overflow: TextOverflow.ellipsis,),
+                      Text(article.source.name, style: Theme.of(context).textTheme.caption, overflow: TextOverflow.ellipsis,),
                       Text(article.publishedAt != "" ? article.publishedAt.substring(0, 10) : 'Il y a 15 minutes', style: Theme.of(context).textTheme.caption, overflow: TextOverflow.clip,),
                     ],
                   ),

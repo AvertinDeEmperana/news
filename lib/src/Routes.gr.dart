@@ -20,7 +20,6 @@ import 'view/screen/group_screens/SavedNewsScreen.dart' as _i7;
 import 'view/screen/group_screens/SearchScreen.dart' as _i6;
 import 'view/screen/NewsDetailsScreen.dart' as _i2;
 import 'view/screen/SplashScreen.dart' as _i1;
-import 'view_model/NewsListVM.dart' as _i10;
 
 class AppRouter extends _i4.RootStackRouter {
   AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
@@ -36,10 +35,7 @@ class AppRouter extends _i4.RootStackRouter {
       final args = routeData.argsAs<NewsDetailsScreenRouteArgs>();
       return _i4.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i2.NewsDetailsScreen(
-              key: args.key,
-              article: args.article,
-              theNewsListVM: args.theNewsListVM));
+          child: _i2.NewsDetailsScreen(key: args.key, article: args.article));
     },
     GroupScreenRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
@@ -135,31 +131,24 @@ class SplashScreenRoute extends _i4.PageRouteInfo<void> {
 /// [_i2.NewsDetailsScreen]
 class NewsDetailsScreenRoute
     extends _i4.PageRouteInfo<NewsDetailsScreenRouteArgs> {
-  NewsDetailsScreenRoute(
-      {_i8.Key? key,
-      required _i9.Article article,
-      required _i10.NewsListVM theNewsListVM})
+  NewsDetailsScreenRoute({_i8.Key? key, required _i9.Article article})
       : super(NewsDetailsScreenRoute.name,
             path: 'newsdetails/:article',
-            args: NewsDetailsScreenRouteArgs(
-                key: key, article: article, theNewsListVM: theNewsListVM));
+            args: NewsDetailsScreenRouteArgs(key: key, article: article));
 
   static const String name = 'NewsDetailsScreenRoute';
 }
 
 class NewsDetailsScreenRouteArgs {
-  const NewsDetailsScreenRouteArgs(
-      {this.key, required this.article, required this.theNewsListVM});
+  const NewsDetailsScreenRouteArgs({this.key, required this.article});
 
   final _i8.Key? key;
 
   final _i9.Article article;
 
-  final _i10.NewsListVM theNewsListVM;
-
   @override
   String toString() {
-    return 'NewsDetailsScreenRouteArgs{key: $key, article: $article, theNewsListVM: $theNewsListVM}';
+    return 'NewsDetailsScreenRouteArgs{key: $key, article: $article}';
   }
 }
 

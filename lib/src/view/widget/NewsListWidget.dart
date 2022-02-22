@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 
 import '../../data/api/Status.dart';
+import '../../model/Article.dart';
 import '../../view_model/NewsListVM.dart';
 import 'SingleArticleWidget.dart';
 
 class NewsListWidget extends StatefulWidget {
-  final NewsListVM theNewsVM;
-  const NewsListWidget({Key? key, required this.theNewsVM}) : super(key: key);
+  final List<Article>? articles;
+  const NewsListWidget({Key? key, required this.articles}) : super(key: key);
 
   @override
   _NewsListWidgetState createState() => _NewsListWidgetState();
@@ -18,6 +20,7 @@ class _NewsListWidgetState extends State<NewsListWidget> {
   ScrollController theScrollController = ScrollController();
   bool isLoading = false;
   bool allLoaded = false;
+  late NewsListVM theNewsVM;
 
   loadMoreData() async{
       if(allLoaded){
@@ -35,20 +38,22 @@ class _NewsListWidgetState extends State<NewsListWidget> {
       setState(()  {
           isLoading = true;
       });
-      widget.theNewsVM.page++;
-      await widget.theNewsVM.updateListIfNewDataFetched();
+      theNewsVM.page++;
+      await theNewsVM.updateListIfNewDataFetched();
       await Future.delayed(const Duration(seconds: 2));
       setState(() {
           isLoading = false;
-          allLoaded = widget.theNewsVM.articles.length == widget.theNewsVM.totalResults;
+          allLoaded = theNewsVM.articles.length == theNewsVM.totalResults;
       });
   }
 
   @override
   void initState() {
       super.initState();
+      NewsListVM newsVM = Provider.of<NewsListVM>(context, listen: false);
+      theNewsVM = newsVM;
       theScrollController.addListener(() async {
-          if(theScrollController.position.pixels == theScrollController.position.maxScrollExtent && (widget.theNewsVM.result.status == Status.COMPLETED)){
+          if(theScrollController.position.pixels == theScrollController.position.maxScrollExtent && (theNewsVM.result.status == Status.COMPLETED)){
               loadMoreData();
           }
       });
@@ -85,8 +90,8 @@ class _NewsListWidgetState extends State<NewsListWidget> {
                   ListView.builder(
                       controller: theScrollController,
                       physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                      itemCount: widget.theNewsVM.articles.length,
-                      itemBuilder: ((context, index) => SingleArticleWidget(article: widget.theNewsVM.articles[index], theNewsListVM: widget.theNewsVM))
+                      itemCount: widget.articles!.length,
+                      itemBuilder: ((context, index) => SingleArticleWidget(article: widget.articles![index]))
                   ),
                   if(isLoading)...[
                     Positioned(

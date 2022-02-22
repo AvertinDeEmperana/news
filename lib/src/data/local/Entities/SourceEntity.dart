@@ -5,11 +5,11 @@ import '../../../model/Source.dart';
 @Entity()
 class SourceEntity{
     int id = 0;
-    String? stringId;
-    String? name;
+    late String stringId;
+    late String name;
 
     Source toSource(){
-        return Source(id: stringId?? "", name: name?? "");
+        return Source.fromEntity(iD: id, id: stringId, name: name);
     }
 }
 
