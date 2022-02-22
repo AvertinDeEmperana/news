@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:news/src/data/local/LocalDbHelper.dart';
 import 'package:news/src/view/widget/NewsListCarousel.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
@@ -20,10 +22,10 @@ class NewsDetailsScreen extends StatefulWidget {
 }
 
 class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
+  int savedNumber = -1;
   @override
   Widget build(BuildContext context) {
     double dWidth = MediaQuery.of(context).size.width;
-    double dHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           tooltip: "Partager l'article",
@@ -71,9 +73,9 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                               color: Colors.white,
                             ),
                             IconButton(
-                              icon: const Icon(Icons.bookmark_border_outlined),
+                              icon: savedNumber != -1 ? const Icon(Icons.bookmark_outlined) : const Icon(Icons.bookmark_border_outlined),
                               onPressed: () {
-                                return;
+                                _toggleSave();
                               },
                               color: Colors.white,
                             ),
@@ -95,8 +97,8 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                                 padding: const EdgeInsets.all(10),
                                 child: Text(
                                   widget.article.author != ""
-                                      ? widget.article.author!
-                                      : (widget.article.source!.name != "" ? widget.article.source!.name!  : 'Auteur inconnu') ,
+                                      ? widget.article.author
+                                      : (widget.article.source.name != "" ? widget.article.source.name  : 'Auteur inconnu') ,
                                   style: const TextStyle(
                                       color: Colors.white,
                                       letterSpacing: 0.3,
@@ -144,15 +146,15 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                                     ),
                                     Text(
                                       Util.articleText(
-                                          widget.article.source?.name),
+                                          widget.article.source.name),
                                       style: const TextStyle(
                                           color: Colors.white, fontSize: 14),
                                       overflow: TextOverflow.clip,
                                     ),
                                   ]),
                                   Text(
-                                    widget.article.publishedAt != null
-                                        ? widget.article.publishedAt!
+                                    widget.article.publishedAt != ""
+                                        ? widget.article.publishedAt
                                             .substring(0, 10)
                                         : 'Il y a 15 minutes',
                                     style: const TextStyle(
@@ -201,7 +203,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                       if (widget.article.url != "") ...[
                         GestureDetector(
                           onTap: () => _launchUrl(
-                              widget.article.url ?? "https://newsapi.org"),
+                              widget.article.url == "" ? "https://newsapi.org" : widget.article.url),
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 8.0),
                             child: Row(
@@ -259,5 +261,26 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   void _onShare(BuildContext context) async {
     await Share.share(Util.articleText(widget.article.url),
         subject: Util.articleText(widget.article.title));
+  }
+
+  void _toggleSave() {
+    savedNumber == -1 ? _save() : _delete();
+  }
+
+  Future<void> _delete() async {
+    if(await LocalDbHelper.deleteArticleWithId(savedNumber)){
+      print("Supprimé");
+      setState(() {
+        savedNumber = -1;
+      });
+    }
+  }
+
+  Future<void> _save() async {
+    var articleID = await LocalDbHelper.saveArticle(widget.article);
+    print("Sauvegardé avec l'id : $articleID");
+    setState(() {
+      savedNumber = articleID;
+    });
   }
 }

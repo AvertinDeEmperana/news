@@ -53,8 +53,8 @@ class SingleArticleWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(Util.articleText(article.source?.name), style: Theme.of(context).textTheme.caption, overflow: TextOverflow.ellipsis,),
-                      Text(article.publishedAt != null ? article.publishedAt!.substring(0, 10) : 'Il y a 15 minutes', style: Theme.of(context).textTheme.caption, overflow: TextOverflow.clip,),
+                      Text(Util.articleText(article.source.name), style: Theme.of(context).textTheme.caption, overflow: TextOverflow.ellipsis,),
+                      Text(article.publishedAt != "" ? article.publishedAt.substring(0, 10) : 'Il y a 15 minutes', style: Theme.of(context).textTheme.caption, overflow: TextOverflow.clip,),
                     ],
                   ),
                 ],
