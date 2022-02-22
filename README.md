@@ -4,28 +4,13 @@ A news app made with flutter using newsapi.org endpoints. This app is a non prof
 
 ## App Screenshots
 
-<div class="row">
-  <div class="col-md-3 mx-2">
-    <img src="https://user-images.githubusercontent.com/29286513/155227532-e6b0cc79-a0d3-4bcd-9581-4d59e53a3e1c.png" alt="Alt text" title="Optional title" style="display: inline-block; margin: 0 auto; max-width: 300px">
-  </div>
-  <div class="col-md-3 mx-2">
-  </div>
-  <div class="col-md-3 mx-2">
-  </div>
-  <div class="col-md-3 mx-2">
-  </div>
-  <div class="col-md-3 mx-2">
-  </div>
-  <div class="col-md-3 mx-2">
-  </div>
-</div>
+<img src="https://user-images.githubusercontent.com/29286513/155227532-e6b0cc79-a0d3-4bcd-9581-4d59e53a3e1c.png" alt="Alt text" title="Optional title" style="display: inline-block; margin: 0 auto; max-width: 300px; max-height: 500px">
 
-![image](https://user-images.githubusercontent.com/29286513/155227532-e6b0cc79-a0d3-4bcd-9581-4d59e53a3e1c.png)  ![image](https://user-images.githubusercontent.com/29286513/155227578-db69a770-ddc2-41fe-ad52-b749ca18ed34.png)
-![image](https://user-images.githubusercontent.com/29286513/155227637-11bb36d8-4217-4c9e-a3c9-3bab8819f219.png)
-![image](https://user-images.githubusercontent.com/29286513/155227673-9437b52e-2536-4331-8145-94398346e720.png)
-https://cdn.discordapp.com/attachments/889457312555757568/945803565199413308/Screenshot_20220222-230010_Android_System.jpg
-https://cdn.discordapp.com/attachments/889457312555757568/945803564457017374/Screenshot_20220222-230018_Android_System.jpg
-![image](https://user-images.githubusercontent.com/29286513/155227745-b2103e45-2bab-41f2-bdab-b70cdc4c664b.png)
+<img src="https://user-images.githubusercontent.com/29286513/155227532-e6b0cc79-a0d3-4bcd-9581-4d59e53a3e1c.png" alt="Alt text" title="Optional title" style="display: inline-block; margin: 0 auto; max-width: 300px; max-height: 500px">
+
+<img src="https://user-images.githubusercontent.com/29286513/155227532-e6b0cc79-a0d3-4bcd-9581-4d59e53a3e1c.png" alt="Alt text" title="Optional title" style="display: inline-block; margin: 0 auto; max-width: 300px; max-height: 500px">
+
+
 
 
 
