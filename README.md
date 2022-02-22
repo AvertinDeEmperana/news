@@ -7,7 +7,7 @@ A news app made with flutter using newsapi.org endpoints. This app is a non prof
 
 <img width="930" alt="frame1" src="https://user-images.githubusercontent.com/29286513/155232878-af23572c-e0cb-409a-a141-fbfca8e56fed.PNG">
 <img width="925" alt="frame2" src="https://user-images.githubusercontent.com/29286513/155233062-6635917a-0d83-4cdf-a6c2-f55e063f20a6.PNG">
-<img width="423" alt="frame3" src="https://user-images.githubusercontent.com/29286513/155233117-64bd7047-8a8b-4039-84cf-df99836687e5.PNG">
+<img width="423" alt="frame3" style=display: inline-block; margin: 0 auto; src="https://user-images.githubusercontent.com/29286513/155233117-64bd7047-8a8b-4039-84cf-df99836687e5.PNG">
 
 ## Usages
 
@@ -26,7 +26,11 @@ A news app made with flutter using newsapi.org endpoints. This app is a non prof
 
 ## Design patter: MVVM
 
-The key benefit is allowing true separation between the View and Model and the efficiency that you gain from having that. What it means in real terms is that when your model needs to change, it can be changed easily without the view needing to and vice-versa.
+The Model–View–ViewModel (MVVM) is one of the best architectural pattern to design applications and software. Combined to providers,
+it help to wrappe the model classes and manage the communication and statments between the business logic an UI. The ViewModel is the mediator
+wich carry all users events.
+When the model needs to change, it can be changed easily without the view needing to and vice-versa.What it means in real terms is that when your 
+model needs to change, it can be changed easily without the view needing to and vice-versa.
 
 ## Interesting packages used for this app
 
