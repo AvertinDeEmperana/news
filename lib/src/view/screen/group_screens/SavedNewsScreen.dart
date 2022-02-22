@@ -3,10 +3,8 @@ import 'package:news/src/view/widget/SavedNewsListWidget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/api/Status.dart';
-import '../../../model/Article.dart';
 import '../../../view_model/SavedNewsVM.dart';
 import '../../widget/ArticlesNotFoundWidget.dart';
-import '../../widget/NewsListWidget.dart';
 import '../../widget/ShimmerNewsListWidget.dart';
 
 class SavedNewsScreen extends StatefulWidget {
@@ -25,6 +23,7 @@ class _SavedNewsScreenState extends State<SavedNewsScreen> {
     super.initState();
     SavedNewsVM tsnvm = Provider.of<SavedNewsVM>(context, listen: false);
     snVM = tsnvm;
+    snVM.getAllSavedArticleCount();
     snVM.loadArticles();
   }
 

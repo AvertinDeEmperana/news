@@ -33,7 +33,6 @@ class NewsListVM extends ChangeNotifier {
   }
 
   Future<void> updateListIfNewDataFetched() async{
-    print("Valeur de page ::: $page");
     isQuerying = true;
     notifyListeners();
     _repo
@@ -46,6 +45,5 @@ class NewsListVM extends ChangeNotifier {
     otherResult = response;
     articles.addAll(otherResult.data!.articles);
     notifyListeners();
-    print("Nouvelle taille de la liste d'article : ${articles.length}");
   }
 }

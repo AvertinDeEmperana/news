@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../../data/api/Status.dart';
 import '../../model/Article.dart';
-import '../../view_model/NewsListVM.dart';
 import 'SingleArticleWidget.dart';
 
 class SavedNewsListWidget extends StatefulWidget {
@@ -18,13 +17,22 @@ class SavedNewsListWidget extends StatefulWidget {
 }
 
 class _SavedNewsListWidgetState extends State<SavedNewsListWidget> {
+
+
   ScrollController theScrollController = ScrollController();
   bool isLoading = false;
-  bool allLoaded = false;
-  late SavedNewsVM snVM;
+  late bool allLoaded;
 
   loadMoreData() async{
+    SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
+    setState(()  {
+      isLoading = true;
+    });
+    await Future.delayed(const Duration(seconds: 3));
     if(allLoaded){
+      setState(()  {
+        isLoading = false;
+      });
       Fluttertoast.showToast(
           msg: "Tous les articles ont été chargé",
           toastLength: Toast.LENGTH_SHORT,
@@ -39,8 +47,7 @@ class _SavedNewsListWidgetState extends State<SavedNewsListWidget> {
     setState(()  {
       isLoading = true;
     });
-    snVM.page++;
-    await snVM.getTwentyArticles();
+    snVM.loadArticles();
     await Future.delayed(const Duration(seconds: 2));
     setState(() {
       isLoading = false;
@@ -51,10 +58,14 @@ class _SavedNewsListWidgetState extends State<SavedNewsListWidget> {
   @override
   void initState() {
     super.initState();
-    SavedNewsVM tnewsVM = Provider.of<SavedNewsVM>(context, listen: false);
-    snVM = tnewsVM;
+    SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
+    snVM.loadArticles();
+    allLoaded = snVM.localDbArticles.length == snVM.totalResults;
     theScrollController.addListener(() async {
-      if(theScrollController.position.pixels == theScrollController.position.maxScrollExtent && (snVM.status == Status.COMPLETED)){
+      if(
+      (theScrollController.position.pixels == theScrollController.position.maxScrollExtent
+          && (snVM.status == Status.COMPLETED)) || (snVM.localDbArticles.length < snVM.totalResults)
+      ){
         loadMoreData();
       }
     });

@@ -20,18 +20,21 @@ class NewsDetailsScreen extends StatefulWidget {
 
 class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
-  int savedNumber = -1;
-  SavedNewsVM snVM = SavedNewsVM();
+  late int savedNumber = widget.article.id;
 
   @override
   void initState() {
     super.initState();
-    //SavedNewsVM tsnVM = Provider.of<SavedNewsVM>(context);
+    SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
+    snVM.loadArticles();
+    snVM.currentArticle = widget.article;
+    //snVM.isSaved ? savedNumber = widget.article.id : '';
+    snVM.checkSavedStatus();
   }
+
 
   @override
   Widget build(BuildContext context) {
-    //SavedNewsVM snVM = Provider.of<SavedNewsVM>(context);
     double dWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         floatingActionButton: FloatingActionButton(
@@ -80,9 +83,19 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                               color: Colors.white,
                             ),
                             IconButton(
-                              icon: savedNumber != -1 ? const Icon(Icons.bookmark_outlined) : const Icon(Icons.bookmark_border_outlined),
+                              icon: Consumer<SavedNewsVM>(builder: (context, snVM, _){
+                                  switch(snVM.isSaved){
+                                    case true:
+                                        return const Icon(Icons.bookmark_outlined);
+                                    case false:
+                                      return const Icon(Icons.bookmark_border_outlined);
+                                    default:
+                                      return const Icon(Icons.bookmark_border_outlined);
+                                      //savedNumber != -1 ? const Icon(Icons.bookmark_outlined) : const Icon(Icons.bookmark_border_outlined),
+                                  }
+                              }),
                               onPressed: () async{
-                                _toggleSave();
+                                _toggleSave(context);
                               },
                               color: Colors.white,
                             ),
@@ -268,35 +281,22 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         subject: Util.articleText(widget.article.title));
   }
 
-  Future<void> _toggleSave() async {
-    savedNumber == -1 ? await _save() : await _delete();
+  Future<void> _toggleSave(BuildContext context) async {
+    SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
+    snVM.isSaved ? await _delete(context) : await _save(context);
   }
 
-  /*Future<void> _delete() async {
-    if(await LocalDbHelper.deleteArticleWithId(savedNumber)){
-      setState(() {
-        savedNumber = -1;
-      });
-    }
+  Future<void> _delete(BuildContext context) async {
+    SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
+    await snVM.deleteArticle(savedNumber);
   }
 
-  Future<void> _save() async {
-    var articleID = await LocalDbHelper.saveArticle(widget.article);
-    setState(() {
-      savedNumber = articleID;
-    });
-  }*/
-
-  Future<void> _delete() async {
-    if(await snVM.deleteArticle(savedNumber)){
-      setState(() {
-        savedNumber = -1;
-      });
-    }
-  }
-
-  Future<void> _save() async {
+  Future<void> _save(BuildContext context) async {
+    SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
     var articleID = await snVM.saveArticle();
+    if(articleID == -200) {
+      return;
+    }
     setState(() {
       savedNumber = articleID;
     });
