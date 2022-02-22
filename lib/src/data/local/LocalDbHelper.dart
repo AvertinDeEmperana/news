@@ -1,14 +1,15 @@
-import 'package:news/objectbox.g.dart';
+
 import 'package:news/src/data/local/Entities/ArticleEntity.dart';
 
+import '../../../objectbox.g.dart';
 import '../../model/Article.dart';
 
 class LocalDbHelper {
     static Future<int> saveArticle(Article article) async {
-        var articleEntity = article.toEntity();
+        //ArticleEntity articleEntity = article.toEntity();
         var store = await openStore();
         var box = store.box<ArticleEntity>();
-        var id = box.put(articleEntity);
+        var id = box.put(article.toEntity());
         store.close();
         return id;
     }
@@ -21,6 +22,7 @@ class LocalDbHelper {
         store.close();
         return res;
     }
+
     static Future<bool> deleteArticleWithId(int id) async {
         var store = await openStore();
         var box = store.box<ArticleEntity>();
@@ -29,12 +31,51 @@ class LocalDbHelper {
         return res;
     }
 
+    static Future<Article?> getArticleWithId(int id) async {
+      var store = await openStore();
+      var box = store.box<ArticleEntity>();
+      var res = box.get(id);
+      var art = res!.toArticle();
+      store.close();
+      return art;
+    }
+
     static Future<List<Article>> getAllArticles() async {
       var store = await openStore();
       var box = store.box<ArticleEntity>();
       var articlesEntities = box.getAll();
+
+      /*List<Article> articles = [];
+      for (var elem in articlesEntities) {
+          articles.add(elem.toArticle());
+      }*/
+
       var articles = articlesEntities.map((e) => e.toArticle()).toList();
       store.close();
       return articles;
     }
+
+    static Future<List<Article>> getTwentyArticles(int page) async {
+
+      var store = await openStore();
+      var box = store.box<ArticleEntity>();
+      //var articlesEntities = box.query().build();
+      var articlesEntities = box.getAll();
+      var articles = articlesEntities.map((e) => e.toArticle()).toList();
+      /*for (var elem in articlesEntities) {
+        articles.add(elem.toArticle());
+      }*/
+      //var articles = articlesEntities.map((e) => e.toArticle()).toList();
+      store.close();
+      return articles;
+    }
+
+    static Future<int> getAllArticlesCount() async {
+        var store = await openStore();
+        var box = store.box<ArticleEntity>();
+        store.close();
+        return box.count();
+    }
+
+
 }

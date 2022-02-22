@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../Routes.gr.dart';
 import '../../model/Article.dart';
@@ -8,15 +9,14 @@ import '../../util/Util.dart';
 import '../../view_model/NewsListVM.dart';
 
 class NewsListCarousel extends StatelessWidget {
-  final NewsListVM theNewsListVM;
-  const NewsListCarousel({Key? key, required this.theNewsListVM}) : super(key: key);
+  const NewsListCarousel({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
+    NewsListVM theNewsListVM = Provider.of<NewsListVM>(context);
     void showDetails(Article article) {
       context.router.replace(
-          NewsDetailsScreenRoute(article: article, theNewsListVM: theNewsListVM)
+          NewsDetailsScreenRoute(article: article)
       );
     }
 
@@ -57,7 +57,7 @@ class NewsListCarousel extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      Util.articleText(theNewsListVM.articles[index].title),
+                      theNewsListVM.articles[index].title,
                       style: Theme.of(context).textTheme.headline6,
                       textAlign: TextAlign.justify,
                       overflow: TextOverflow.clip,
@@ -80,10 +80,10 @@ class NewsListCarousel extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 5,),
-                              Text(Util.articleText(theNewsListVM.articles[index].source.name) != "" ?
-                              (Util.articleText(theNewsListVM.articles[index].source.name).length >= 15 ?
-                              Util.articleText(theNewsListVM.articles[index].source.name).substring(0, 15) :
-                              Util.articleText(theNewsListVM.articles[index].source.name)) :
+                              Text(theNewsListVM.articles[index].source.name != "" ?
+                              theNewsListVM.articles[index].source.name.length >= 15 ?
+                              theNewsListVM.articles[index].source.name.substring(0, 15) :
+                              theNewsListVM.articles[index].source.name:
                               'Source inconnue', style: Theme.of(context).textTheme.caption, overflow: TextOverflow.clip,),
                             ]
                         ),

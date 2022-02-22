@@ -4,80 +4,80 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:8367770784792078563",
-      "lastPropertyId": "9:2785811252063011937",
+      "id": "1:1723441048822937315",
+      "lastPropertyId": "9:8994420598700696521",
       "name": "ArticleEntity",
       "properties": [
         {
-          "id": "1:3854138260239587372",
+          "id": "1:378379808707710105",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:3873730559857055820",
+          "id": "2:2724787480275546928",
           "name": "author",
           "type": 9
         },
         {
-          "id": "3:1050764465648368538",
+          "id": "3:178443605207549312",
           "name": "title",
           "type": 9
         },
         {
-          "id": "4:942574798537710880",
+          "id": "4:629421376945092073",
           "name": "description",
           "type": 9
         },
         {
-          "id": "5:2501627430397289789",
+          "id": "5:7347625671036972593",
           "name": "url",
           "type": 9
         },
         {
-          "id": "6:1575217714704571167",
+          "id": "6:2710004346129257010",
           "name": "urlToImage",
           "type": 9
         },
         {
-          "id": "7:6265236994656948284",
+          "id": "7:7704868094624544820",
           "name": "publishedAt",
           "type": 9
         },
         {
-          "id": "8:6136243344668882483",
+          "id": "8:1510403029005249387",
           "name": "content",
           "type": 9
         },
         {
-          "id": "9:2785811252063011937",
+          "id": "9:8994420598700696521",
           "name": "sourceEntityId",
           "type": 11,
           "flags": 520,
-          "indexId": "1:4767638752499745501",
+          "indexId": "1:5998048931707741898",
           "relationTarget": "SourceEntity"
         }
       ],
       "relations": []
     },
     {
-      "id": "2:7983240008564206862",
-      "lastPropertyId": "3:8998040584718911243",
+      "id": "2:2105469867249947912",
+      "lastPropertyId": "3:2418417811889843170",
       "name": "SourceEntity",
       "properties": [
         {
-          "id": "1:6738824679944023744",
+          "id": "1:397608098143844864",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:6511122165604967201",
+          "id": "2:3181427865169867306",
           "name": "stringId",
           "type": 9
         },
         {
-          "id": "3:8998040584718911243",
+          "id": "3:2418417811889843170",
           "name": "name",
           "type": 9
         }
@@ -85,8 +85,8 @@
       "relations": []
     }
   ],
-  "lastEntityId": "2:7983240008564206862",
-  "lastIndexId": "1:4767638752499745501",
+  "lastEntityId": "2:2105469867249947912",
+  "lastIndexId": "1:5998048931707741898",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

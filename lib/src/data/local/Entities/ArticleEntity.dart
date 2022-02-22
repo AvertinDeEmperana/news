@@ -5,26 +5,27 @@ import 'SourceEntity.dart';
 @Entity()
 class ArticleEntity {
   int id = 0;
-  String? author;
-  String? title;
-  String? description;
-  String? url;
-  String? urlToImage;
-  String? publishedAt;
-  String? content;
+  late String author;
+  late String title;
+  late String description;
+  late String url;
+  late String urlToImage;
+  late String publishedAt;
+  late String content;
 
   final sourceEntity = ToOne<SourceEntity>();
 
   Article toArticle() {
-      return Article(
-        source: sourceEntity.target!.toSource(),
-        author: author,
-        content: content,
-        description: description,
-        url: url,
-        urlToImage: urlToImage,
-        publishedAt: publishedAt,
-        title: title
+      return Article.fromEntity(
+          author: author,
+          content: content,
+          description: description,
+          url: url,
+          urlToImage: urlToImage,
+          publishedAt: publishedAt,
+          title: title,
+          id: id,
+          source: sourceEntity.target!.toSource(),
       );
   }
 
@@ -49,11 +50,12 @@ class ArticleEntity {
 extension ArticleExtension on Article{
     ArticleEntity toEntity() {
         //Source entity
+        ArticleEntity articleEntity = ArticleEntity();
         SourceEntity sourceEntity = SourceEntity();
         sourceEntity.stringId = source.id;
         sourceEntity.name = source.name;
 
-        ArticleEntity articleEntity = ArticleEntity();
+        articleEntity.id = id;
         articleEntity.author = author;
         articleEntity.title = title;
         articleEntity.description = description;

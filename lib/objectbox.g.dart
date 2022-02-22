@@ -16,79 +16,79 @@ export 'package:objectbox/objectbox.dart'; // so that callers only have to impor
 
 final _entities = <ModelEntity>[
   ModelEntity(
-      id: const IdUid(1, 8367770784792078563),
+      id: const IdUid(1, 1723441048822937315),
       name: 'ArticleEntity',
-      lastPropertyId: const IdUid(9, 2785811252063011937),
+      lastPropertyId: const IdUid(9, 8994420598700696521),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 3854138260239587372),
+            id: const IdUid(1, 378379808707710105),
             name: 'id',
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 3873730559857055820),
+            id: const IdUid(2, 2724787480275546928),
             name: 'author',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 1050764465648368538),
+            id: const IdUid(3, 178443605207549312),
             name: 'title',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(4, 942574798537710880),
+            id: const IdUid(4, 629421376945092073),
             name: 'description',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(5, 2501627430397289789),
+            id: const IdUid(5, 7347625671036972593),
             name: 'url',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(6, 1575217714704571167),
+            id: const IdUid(6, 2710004346129257010),
             name: 'urlToImage',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(7, 6265236994656948284),
+            id: const IdUid(7, 7704868094624544820),
             name: 'publishedAt',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(8, 6136243344668882483),
+            id: const IdUid(8, 1510403029005249387),
             name: 'content',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(9, 2785811252063011937),
+            id: const IdUid(9, 8994420598700696521),
             name: 'sourceEntityId',
             type: 11,
             flags: 520,
-            indexId: const IdUid(1, 4767638752499745501),
+            indexId: const IdUid(1, 5998048931707741898),
             relationTarget: 'SourceEntity')
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
   ModelEntity(
-      id: const IdUid(2, 7983240008564206862),
+      id: const IdUid(2, 2105469867249947912),
       name: 'SourceEntity',
-      lastPropertyId: const IdUid(3, 8998040584718911243),
+      lastPropertyId: const IdUid(3, 2418417811889843170),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 6738824679944023744),
+            id: const IdUid(1, 397608098143844864),
             name: 'id',
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 6511122165604967201),
+            id: const IdUid(2, 3181427865169867306),
             name: 'stringId',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 8998040584718911243),
+            id: const IdUid(3, 2418417811889843170),
             name: 'name',
             type: 9,
             flags: 0)
@@ -117,8 +117,8 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(2, 7983240008564206862),
-      lastIndexId: const IdUid(1, 4767638752499745501),
+      lastEntityId: const IdUid(2, 2105469867249947912),
+      lastIndexId: const IdUid(1, 5998048931707741898),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
@@ -139,23 +139,13 @@ ModelDefinition getObjectBoxModel() {
           object.id = id;
         },
         objectToFB: (ArticleEntity object, fb.Builder fbb) {
-          final authorOffset =
-              object.author == null ? null : fbb.writeString(object.author!);
-          final titleOffset =
-              object.title == null ? null : fbb.writeString(object.title!);
-          final descriptionOffset = object.description == null
-              ? null
-              : fbb.writeString(object.description!);
-          final urlOffset =
-              object.url == null ? null : fbb.writeString(object.url!);
-          final urlToImageOffset = object.urlToImage == null
-              ? null
-              : fbb.writeString(object.urlToImage!);
-          final publishedAtOffset = object.publishedAt == null
-              ? null
-              : fbb.writeString(object.publishedAt!);
-          final contentOffset =
-              object.content == null ? null : fbb.writeString(object.content!);
+          final authorOffset = fbb.writeString(object.author);
+          final titleOffset = fbb.writeString(object.title);
+          final descriptionOffset = fbb.writeString(object.description);
+          final urlOffset = fbb.writeString(object.url);
+          final urlToImageOffset = fbb.writeString(object.urlToImage);
+          final publishedAtOffset = fbb.writeString(object.publishedAt);
+          final contentOffset = fbb.writeString(object.content);
           fbb.startTable(10);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, authorOffset);
@@ -176,19 +166,19 @@ ModelDefinition getObjectBoxModel() {
           final object = ArticleEntity()
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
             ..author =
-                const fb.StringReader().vTableGetNullable(buffer, rootOffset, 6)
+                const fb.StringReader().vTableGet(buffer, rootOffset, 6, '')
             ..title =
-                const fb.StringReader().vTableGetNullable(buffer, rootOffset, 8)
-            ..description = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 10)
-            ..url = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 12)
-            ..urlToImage = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 14)
-            ..publishedAt = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 16)
-            ..content = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 18);
+                const fb.StringReader().vTableGet(buffer, rootOffset, 8, '')
+            ..description =
+                const fb.StringReader().vTableGet(buffer, rootOffset, 10, '')
+            ..url =
+                const fb.StringReader().vTableGet(buffer, rootOffset, 12, '')
+            ..urlToImage =
+                const fb.StringReader().vTableGet(buffer, rootOffset, 14, '')
+            ..publishedAt =
+                const fb.StringReader().vTableGet(buffer, rootOffset, 16, '')
+            ..content =
+                const fb.StringReader().vTableGet(buffer, rootOffset, 18, '');
           object.sourceEntity.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0);
           object.sourceEntity.attach(store);
@@ -203,11 +193,8 @@ ModelDefinition getObjectBoxModel() {
           object.id = id;
         },
         objectToFB: (SourceEntity object, fb.Builder fbb) {
-          final stringIdOffset = object.stringId == null
-              ? null
-              : fbb.writeString(object.stringId!);
-          final nameOffset =
-              object.name == null ? null : fbb.writeString(object.name!);
+          final stringIdOffset = fbb.writeString(object.stringId);
+          final nameOffset = fbb.writeString(object.name);
           fbb.startTable(4);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, stringIdOffset);
@@ -222,9 +209,9 @@ ModelDefinition getObjectBoxModel() {
           final object = SourceEntity()
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
             ..stringId =
-                const fb.StringReader().vTableGetNullable(buffer, rootOffset, 6)
-            ..name = const fb.StringReader()
-                .vTableGetNullable(buffer, rootOffset, 8);
+                const fb.StringReader().vTableGet(buffer, rootOffset, 6, '')
+            ..name =
+                const fb.StringReader().vTableGet(buffer, rootOffset, 8, '');
 
           return object;
         })

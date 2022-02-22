@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news/src/data/local/LocalDbHelper.dart';
 import 'package:news/src/view/widget/NewsListCarousel.dart';
+import 'package:news/src/view_model/SavedNewsVM.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -11,10 +13,9 @@ import '../../view_model/NewsListVM.dart';
 
 class NewsDetailsScreen extends StatefulWidget {
   final Article article;
-  final NewsListVM theNewsListVM;
 
   const NewsDetailsScreen(
-      {Key? key, required this.article, required this.theNewsListVM})
+      {Key? key, required this.article})
       : super(key: key);
 
   @override
@@ -22,15 +23,19 @@ class NewsDetailsScreen extends StatefulWidget {
 }
 
 class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
+
+
+
   int savedNumber = -1;
   @override
   Widget build(BuildContext context) {
+    SavedNewsVM snVM = Provider.of<SavedNewsVM>(context);
     double dWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           tooltip: "Partager l'article",
           backgroundColor: Colors.black87,
-          onPressed: () => Util.articleText(widget.article.url).isEmpty
+          onPressed: () => widget.article.url.isEmpty
               ? null
               : _onShare(context),
           child: const Icon(
@@ -74,7 +79,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                             ),
                             IconButton(
                               icon: savedNumber != -1 ? const Icon(Icons.bookmark_outlined) : const Icon(Icons.bookmark_border_outlined),
-                              onPressed: () {
+                              onPressed: () async{
                                 _toggleSave();
                               },
                               color: Colors.white,
@@ -98,7 +103,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                                 child: Text(
                                   widget.article.author != ""
                                       ? widget.article.author
-                                      : (widget.article.source.name != "" ? widget.article.source.name  : 'Auteur inconnu') ,
+                                      : (widget.article.source.name != "" ? widget.article.source.name : 'Auteur inconnu') ,
                                   style: const TextStyle(
                                       color: Colors.white,
                                       letterSpacing: 0.3,
@@ -145,8 +150,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                                       width: 5,
                                     ),
                                     Text(
-                                      Util.articleText(
-                                          widget.article.source.name),
+                                      widget.article.source.name,
                                       style: const TextStyle(
                                           color: Colors.white, fontSize: 14),
                                       overflow: TextOverflow.clip,
@@ -239,7 +243,6 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                             ],
                           ),
                       ),*/
-                      NewsListCarousel(theNewsListVM: widget.theNewsListVM)
                     ],
                   ),
                 ),
@@ -263,13 +266,12 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         subject: Util.articleText(widget.article.title));
   }
 
-  void _toggleSave() {
-    savedNumber == -1 ? _save() : _delete();
+  Future<void> _toggleSave() async {
+    savedNumber == -1 ? await _save() : await _delete();
   }
 
   Future<void> _delete() async {
     if(await LocalDbHelper.deleteArticleWithId(savedNumber)){
-      print("Supprimé");
       setState(() {
         savedNumber = -1;
       });
@@ -278,9 +280,23 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
   Future<void> _save() async {
     var articleID = await LocalDbHelper.saveArticle(widget.article);
-    print("Sauvegardé avec l'id : $articleID");
     setState(() {
       savedNumber = articleID;
     });
   }
+
+  /*Future<void> _delete() async {
+    if(await snVM.deleteArticle(savedNumber)){
+      setState(() {
+        savedNumber = -1;
+      });
+    }
+  }
+
+  Future<void> _save() async {
+    var articleID = await snVM.saveArticle();
+    setState(() {
+      savedNumber = articleID;
+    });
+  }*/
 }
