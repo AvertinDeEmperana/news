@@ -6,12 +6,13 @@ import '../model/Article.dart';
 class SavedNewsVM extends ChangeNotifier {
   int page = 1;
   List<Article> localDbArticles = [];
-  var status = Status.COMPLETED;
+  var status = Status.LOADING;
   late int totalResults = 0;
   late Article currentArticle;
   bool isSaved = false;
 
   Future<void> loadArticles() async {
+    print("Try to load articles");
     var articles = await LocalDbHelper.getAllArticles();
     if(articles.isNotEmpty){
         for(var article in articles){
@@ -22,10 +23,10 @@ class SavedNewsVM extends ChangeNotifier {
                 notifyListeners();
             }
         }
-        if(localDbArticles.isEmpty){
-          status = Status.NOTFOUND;
-          notifyListeners();
-        }
+    }
+    if(localDbArticles.isEmpty){
+      status = Status.NOTFOUND;
+      notifyListeners();
     }
   }
 
@@ -37,6 +38,7 @@ class SavedNewsVM extends ChangeNotifier {
     else{
       isSaved = true;
       totalResults++;
+      loadArticles();
       notifyListeners();
       return articleID;
     }
@@ -48,6 +50,7 @@ class SavedNewsVM extends ChangeNotifier {
         isSaved = false;
         totalResults--;
         localDbArticles.removeWhere((element) => element.id == i);
+        localDbArticles.isEmpty ? status = Status.NOTFOUND:'';
         notifyListeners();
     }
     return isDeleted;

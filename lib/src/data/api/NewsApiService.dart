@@ -8,7 +8,7 @@ import 'BaseApi.dart';
 class NewsApiService extends BaseApiService {
 
     @override
-    Future getResponse(int page) async {
+    Future getResponse(String query) async {
         dynamic responseJson;
         Dio dio = Dio(
             BaseOptions(
@@ -21,7 +21,7 @@ class NewsApiService extends BaseApiService {
             )
         );
         try{
-            Response response = await dio.get("top-headlines?country=fr&page=$page");
+            Response response = await dio.get(query);
             responseJson = returnResponse(response);
         }on DioError catch(e) {
             if (kDebugMode) {
