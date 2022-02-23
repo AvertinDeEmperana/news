@@ -14,6 +14,7 @@ class AppTheme {
   static const Color _lightOnSecondaryIconColor = Colors.white;
   static const Color lightShimmerGrey200Color = Color(0xFFEEEEEE);
   static const Color lightShimmerGrey100Color = Color(0xFFF5F5F5);
+  static const Color lightGrey = Color(0xFFF6F6F6);
 
   static final ThemeData lightTheme = ThemeData(
 
@@ -32,6 +33,8 @@ class AppTheme {
     visualDensity: VisualDensity.adaptivePlatformDensity,
 
     textTheme: _lightTextTheme,
+
+    fontFamily: 'OpenSans',
 
     // inputDecorationTheme: _lightInputDecorationTheme,
 

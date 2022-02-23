@@ -43,7 +43,8 @@ class _NewsListWidgetState extends State<NewsListWidget> {
       await Future.delayed(const Duration(seconds: 2));
       setState(() {
           isLoading = false;
-          allLoaded = theNewsVM.articles.length == theNewsVM.totalResults;
+          allLoaded = theNewsVM.topHeadlines.length == theNewsVM.totalResults;
+          allLoaded = widget.articles?.length == theNewsVM.totalResults;
       });
   }
 

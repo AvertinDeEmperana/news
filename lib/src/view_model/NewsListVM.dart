@@ -8,7 +8,7 @@ import '../repository/NewsRepository.dart';
 class NewsListVM extends ChangeNotifier {
   final _repo = NewsRepository();
   int page = 1;
-  List<Article> articles = [];
+  List<Article> topHeadlines = [];
   int totalResults = 0;
   bool isQuerying = false;
 
@@ -19,9 +19,8 @@ class NewsListVM extends ChangeNotifier {
   Future<void> _setResult(ApiResponse<Result> response) async {
     result = response;
     notifyListeners();
-    result.data != null ? articles.addAll(result.data!.articles) : "";
+    result.data != null ? topHeadlines.addAll(result.data!.articles) : "";
     result.data != null ? totalResults = result.data!.totalResults : 0 ;
-    //print("The fucking totalResults ${result.data!.totalResults}");
   }
 
   Future<void> fetchTopHeadlinesNews() async {
@@ -43,7 +42,7 @@ class NewsListVM extends ChangeNotifier {
 
   void updateArticlesList(ApiResponse<Result> response){
     otherResult = response;
-    articles.addAll(otherResult.data!.articles);
+    topHeadlines.addAll(otherResult.data!.articles);
     notifyListeners();
   }
 }

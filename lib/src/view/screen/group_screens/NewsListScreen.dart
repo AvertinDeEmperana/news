@@ -67,23 +67,19 @@ class _NewsListScreenState extends State<NewsListScreen> {
 
   @override
   Widget build(BuildContext context) {
-      NewsListVM viewModel = Provider.of<NewsListVM>(context);
       return Scaffold(
-          body: ChangeNotifierProvider<NewsListVM>(
-              create: (BuildContext context) => viewModel,
-              child: Consumer<NewsListVM>(builder: (context, viewModel, _) {
-                  switch (viewModel.result.status) {
-                      case Status.LOADING:
-                          return const ShimmerNewsListWidget();
-                      case Status.ERROR:
-                          return CustomErrorWidget(theNewsVM: viewModel, errorText: /*viewModel.result.message ?? */ "Une erreur est survenue. Balayer l'écran pour actualiser ");
-                      case Status.COMPLETED:
-                          return NewsListWidget(articles: viewModel.articles,);
-                     default:
-                  }
-                  return Container();
-              }),
-          ),
+          body: Consumer<NewsListVM>(builder: (context, viewModel, _) {
+                switch (viewModel.result.status) {
+                    case Status.LOADING:
+                        return const ShimmerNewsListWidget();
+                    case Status.ERROR:
+                        return CustomErrorWidget(theNewsVM: viewModel, errorText: /*viewModel.result.message ?? */ "Une erreur est survenue. Balayer l'écran pour actualiser ");
+                    case Status.COMPLETED:
+                        return NewsListWidget(articles: viewModel.topHeadlines,);
+                   default:
+                        return const ShimmerNewsListWidget();
+                }
+          }),
       );
   }
 }

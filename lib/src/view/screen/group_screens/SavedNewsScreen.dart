@@ -15,24 +15,19 @@ class SavedNewsScreen extends StatefulWidget {
 }
 
 class _SavedNewsScreenState extends State<SavedNewsScreen> {
-  SavedNewsVM snVM = SavedNewsVM();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    SavedNewsVM tsnvm = Provider.of<SavedNewsVM>(context, listen: false);
-    snVM = tsnvm;
-    snVM.getAllSavedArticleCount();
-    snVM.loadArticles();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ChangeNotifierProvider<SavedNewsVM>(
-        create: (BuildContext context) => snVM,
-        child: Consumer<SavedNewsVM>(builder: (context, snVM, _) {
+      body: Consumer<SavedNewsVM>(builder: (context, snVM, _) {
+          snVM.loadArticles();
+          snVM.getAllSavedArticleCount();
           switch (snVM.status) {
             case Status.LOADING:
               return const ShimmerNewsListWidget();
@@ -44,7 +39,6 @@ class _SavedNewsScreenState extends State<SavedNewsScreen> {
           }
           return Container();
         }),
-      ),
     );
   }
 }

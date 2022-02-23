@@ -14,19 +14,18 @@ class SavedNewsVM extends ChangeNotifier {
   Future<void> loadArticles() async {
     var articles = await LocalDbHelper.getAllArticles();
     if(articles.isNotEmpty){
-      for(var article in articles){
-          if(localDbArticles.contains(article)){}
-          else{
-              localDbArticles.add(article);
-              status = Status.COMPLETED;
-              getAllSavedArticleCount();
-              notifyListeners();
-          }
-      }
-    }
-    else{
-      status = Status.NOTFOUND;
-      notifyListeners();
+        for(var article in articles){
+            if(!localDbArticles.contains(article)){
+                localDbArticles.add(article);
+                status = Status.COMPLETED;
+                getAllSavedArticleCount();
+                notifyListeners();
+            }
+        }
+        if(localDbArticles.isEmpty){
+          status = Status.NOTFOUND;
+          notifyListeners();
+        }
     }
   }
 
@@ -48,6 +47,7 @@ class SavedNewsVM extends ChangeNotifier {
     if(isDeleted){
         isSaved = false;
         totalResults--;
+        localDbArticles.removeWhere((element) => element.id == i);
         notifyListeners();
     }
     return isDeleted;

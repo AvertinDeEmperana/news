@@ -59,13 +59,13 @@ class LocalDbHelper {
     }
 
     static Future<List<Article>> getAllArticles() async {
-      var store = await openStore();
-      var box = store.box<ArticleEntity>();
-      var articlesEntities = box.getAll();
-
-      var articles = articlesEntities.map((e) => e.toArticle()).toList();
-      store.close();
-      return articles;
+        var store = await openStore();
+        var box = store.box<ArticleEntity>();
+        var articlesEntities = box.getAll();
+        List<Article> articles = [];
+        articles.addAll(articlesEntities.map((e) => e.toArticle()).toList());
+        store.close();
+        return articles;
     }
 
     static Future<int> getAllArticlesCount() async {
