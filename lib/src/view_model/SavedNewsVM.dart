@@ -64,7 +64,17 @@ class SavedNewsVM extends ChangeNotifier {
 
   Future<void> checkSavedStatus() async {
     isSaved = await LocalDbHelper.theDbContainsArticle(currentArticle);
+    if(isSaved){
+        currentArticle.id = (await LocalDbHelper.getArticleIdWithTitle(currentArticle.title))!;
+    }
     notifyListeners();
   }
+
+  /*
+  if(await LocalDbHelper.theDbContainsArticle(currentArticle)){
+        currentArticle.id = (await LocalDbHelper.getArticleIdWithTitle(currentArticle.title))!;
+    }
+    notifyListeners();
+   */
 
 }

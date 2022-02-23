@@ -288,6 +288,9 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
   Future<void> _delete(BuildContext context) async {
     SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
+    setState(() {
+      savedNumber = snVM.currentArticle.id;
+    });
     await snVM.deleteArticle(savedNumber);
   }
 

@@ -78,8 +78,8 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: TextField(
-                              onSubmitted: (keywordRecipe) {
-                                //Navigator.push(context, MaterialPageRoute(builder: (context) => FoundedRecipes(recipeFinder(keywordRecipe, _recipeList))));
+                              onSubmitted: (keyword) {
+                                //Navigator.push(context, MaterialPageRoute(builder: (context) => FoundedArticle(articleFinder(keyword))));
                               },
                               style: const TextStyle(fontSize:16),
                               decoration: InputDecoration(
