@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:news/src/view_model/NewsListVM.dart';
 
 class CustomErrorWidget extends StatelessWidget {
     final String errorText;
-    final NewsListVM theNewsVM;
+    final ChangeNotifier theNewsVM;
     const CustomErrorWidget({Key? key, required this.errorText, required this.theNewsVM}) : super(key: key);
 
     @override
@@ -38,6 +37,6 @@ class CustomErrorWidget extends StatelessWidget {
     }
 
   void updateData() async {
-      await theNewsVM.fetchTopHeadlinesNews();
+      //await theNewsVM.fetchTopHeadlinesNews();
   }
 }

@@ -7,14 +7,14 @@ class ArticlesNotFoundWidget extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return Scaffold(
-            body: Center(
+            body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                         Image.asset('assets/images/empty-news-list.png'),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width -32,
+                        Center(
                             child: Text(errorText, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
                         )
                     ],

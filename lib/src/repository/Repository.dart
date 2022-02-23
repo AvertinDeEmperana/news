@@ -6,7 +6,12 @@ class Repository{
   Future<Result?> getTopHeadlinesNewsList(int page) async {
     return null;
   }
-  Future<Result?> getEverythingNewsList(int page) async {
+
+  Future<Result?> getTopHeadlinesCategoryNewsList(String category, int page) async {
+    return null;
+  }
+
+  Future<Result?> getEverythingNewsList(String keyword, int page) async {
     return null;
   }
 }

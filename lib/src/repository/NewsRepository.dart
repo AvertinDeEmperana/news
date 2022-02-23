@@ -11,9 +11,9 @@ class NewsRepository implements Repository {
 
     @override
     Future<Result?> getTopHeadlinesNewsList(int page) async {
+        String query = "top-headlines?country=fr&page=$page";
         try{
-            //&sortBy=publishedAt&pageSize=20
-            dynamic response = await _apiService.getResponse(page);
+            dynamic response = await _apiService.getResponse(query);
             dynamic resJson = Result.fromJson(response);
             return resJson;
         }
@@ -23,8 +23,31 @@ class NewsRepository implements Repository {
         }
     }
 
-    @override
-    Future<Result?> getEverythingNewsList(int page) {
-      throw UnimplementedError();
+  @override
+  Future<Result?> getEverythingNewsList(String keyword, int page) async {
+      String query = "everything?q=$keyword&language=fr&page=$page";
+      try{
+          dynamic response = await _apiService.getResponse(query);
+          dynamic resJson = Result.fromJson(response);
+          return resJson;
+      }
+      catch(e){
+          if (kDebugMode) {print("e =>  $e");}
+          rethrow;
+      }
+  }
+
+  @override
+  Future<Result?> getTopHeadlinesCategoryNewsList(String category, int page) async {
+    String query = "top-headlines?category=$category&language=fr&page=$page";
+    try{
+      dynamic response = await _apiService.getResponse(query);
+      dynamic resJson = Result.fromJson(response);
+      return resJson;
     }
+    catch(e){
+      if (kDebugMode) {print("e =>  $e");}
+      rethrow;
+    }
+  }
 }

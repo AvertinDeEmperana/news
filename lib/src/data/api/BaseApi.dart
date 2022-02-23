@@ -5,9 +5,9 @@ final envConf = EnvironmentConf();
 abstract class BaseApiService {
   final String baseUrl = "https://newsapi.org/v2/";
   //final String apiKey = envConf.theApiKey;
-  final String apiKey = "5122fdcc41ba4c26b5b38176583954a9";
+  final String apiKey = "8d6eee3fb2d74d568f3e540a185ce452";
 
-  Future<dynamic> getResponse(int page);
+  Future<dynamic> getResponse(String query);
 
 }
 

@@ -80,49 +80,29 @@ class _SavedNewsListWidgetState extends State<SavedNewsListWidget> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: RichText(
-              overflow: TextOverflow.ellipsis,
-              text: TextSpan(
-                text: 'Articles enregistrés',
-                style: Theme.of(context).textTheme.headline1,
-                children: const <TextSpan>[
-                  TextSpan(text: '.', style: TextStyle(fontSize: 44)),
-                ],
-              ),
+      child: Stack(
+          children: [
+            ListView.builder(
+                controller: theScrollController,
+                physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                itemCount: widget.articles!.length,
+                itemBuilder: ((context, index) => SingleArticleWidget(article: widget.articles![index]))
             ),
-          ),
-          Expanded(
-              child: Stack(
-                  children: [
-                    ListView.builder(
-                        controller: theScrollController,
-                        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                        itemCount: widget.articles!.length,
-                        itemBuilder: ((context, index) => SingleArticleWidget(article: widget.articles![index]))
-                    ),
-                    if(isLoading)...[
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width,
-                          height: 50,
-                          child: Center(
-                              child: Lottie.asset('assets/splashanime.json')
-                          ),
-                        ),
-                      ),
-                    ],
-                  ])
-          ),
-        ],
-      ),
+            if(isLoading)...[
+              Positioned(
+                bottom: 0,
+                left: 0,
+                child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  child: Center(
+                      child: Lottie.asset('assets/splashanime.json')
+                  ),
+                ),
+              ),
+            ],
+          ])
     );
   }
 }

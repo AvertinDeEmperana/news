@@ -68,6 +68,19 @@ class _NewsListScreenState extends State<NewsListScreen> {
   @override
   Widget build(BuildContext context) {
       return Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            title: RichText(
+              overflow: TextOverflow.ellipsis,
+              text: TextSpan(
+                text: 'Actualités',
+                style: Theme.of(context).textTheme.headline1!.copyWith(fontWeight: FontWeight.w600),
+                children: const <TextSpan>[
+                  TextSpan(text: '.', style: TextStyle(fontSize: 44)),
+                ],
+              ),
+            ),
+          ),
           body: Consumer<NewsListVM>(builder: (context, viewModel, _) {
                 switch (viewModel.result.status) {
                     case Status.LOADING:

@@ -5,7 +5,10 @@ import '../model/Article.dart';
 import '../model/Result.dart';
 import '../repository/NewsRepository.dart';
 
-class NewsListVM extends ChangeNotifier {
+class CategoryNewsListVM extends ChangeNotifier {
+  late final category;
+  CategoryNewsListVM({required this.category});
+
   final _repo = NewsRepository();
   int page = 1;
   List<Article> topHeadlines = [];
@@ -18,7 +21,7 @@ class NewsListVM extends ChangeNotifier {
   Future<void> fetchTopHeadlinesNews() async {
     _setResult(ApiResponse.loading());
     _repo
-        .getTopHeadlinesNewsList(page)
+        .getTopHeadlinesCategoryNewsList(category, page)
         .then((value) => _setResult(ApiResponse.completed(value)))
         .onError((error, stackTrace) => _setResult(ApiResponse.error(error.toString())));
   }
@@ -34,7 +37,7 @@ class NewsListVM extends ChangeNotifier {
     isQuerying = true;
     notifyListeners();
     _repo
-        .getTopHeadlinesNewsList(page)
+        .getTopHeadlinesCategoryNewsList(category, page)
         .then((value) => updateArticlesList(ApiResponse.completed(value)))
         .onError((error, stackTrace) => _setResult(ApiResponse.error(error.toString())));
   }

@@ -58,6 +58,15 @@ class LocalDbHelper {
       return art;
     }
 
+    static Future<int?> getArticleIdWithTitle(String title) async {
+        var store = await openStore();
+        var box = store.box<ArticleEntity>();
+        int ind = 0;
+        ind = box.query(ArticleEntity_.title.equals(title)).build().findFirst()!.id;
+        store.close();
+        return ind;
+    }
+
     static Future<List<Article>> getAllArticles() async {
         var store = await openStore();
         var box = store.box<ArticleEntity>();
