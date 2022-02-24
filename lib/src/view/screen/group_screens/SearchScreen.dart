@@ -153,6 +153,9 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
     if(keyword.isEmpty){
         return;
     }
+    QueryNewsListVM qnlVM = Provider.of<QueryNewsListVM>(context, listen: false);
+    qnlVM.currentKeyword = keyword;
+    qnlVM.fetchTopHeadlinesNews();
     context.router.push(SearchResultScreenRoute(keyword: keyword));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/src/view_model/NewsListVM.dart';
+import 'package:news/src/view_model/QueryNewsListVM.dart';
 import 'package:news/src/view_model/SavedNewsVM.dart';
 import 'package:provider/provider.dart';
 
@@ -41,6 +42,7 @@ class _AppState extends State<App> {
             return nlVM;
           }),
           ChangeNotifierProvider<SavedNewsVM>(create: (BuildContext context) => SavedNewsVM()),
+          ChangeNotifierProvider<QueryNewsListVM>(create: (BuildContext context) => QueryNewsListVM()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

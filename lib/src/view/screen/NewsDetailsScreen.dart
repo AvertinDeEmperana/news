@@ -8,11 +8,8 @@ import '../../model/Article.dart';
 import '../../util/Util.dart';
 
 class NewsDetailsScreen extends StatefulWidget {
-  final Article article;
-
-  const NewsDetailsScreen(
-      {Key? key, required this.article})
-      : super(key: key);
+  Article article;
+  NewsDetailsScreen({Key? key, required this.article}): super(key: key);
 
   @override
   _NewsDetailsScreenState createState() => _NewsDetailsScreenState();
@@ -20,7 +17,6 @@ class NewsDetailsScreen extends StatefulWidget {
 
 class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
-  late int savedNumber = widget.article.id;
 
   @override
   void initState() {
@@ -28,8 +24,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
     snVM.loadArticles();
     snVM.checkSavedStatus();
-    snVM.currentArticle = widget.article;
-    //snVM.isSaved ? savedNumber = widget.article.id : '';
+    snVM.isSaved ? widget.article.id = snVM.currentArticle.id : '';
   }
 
 
@@ -37,18 +32,19 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   Widget build(BuildContext context) {
     double dWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          tooltip: "Partager l'article",
-          backgroundColor: Colors.black87,
-          onPressed: () => widget.article.url.isEmpty
-              ? null
-              : _onShare(context),
-          child: const Icon(
-            Icons.share,
-            color: Colors.white,
-          ),
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Partager l'article",
+        backgroundColor: Colors.black87,
+        onPressed: () => widget.article.url.isEmpty
+            ? null
+            : _onShare(context),
+        child: const Icon(
+          Icons.share,
+          color: Colors.white,
         ),
-        body: SizedBox(
+      ),
+      body: Consumer<SavedNewsVM>(builder: (context, snVM, _) {
+        return SizedBox(
           width: double.maxFinite,
           height: double.maxFinite,
           child: Stack(
@@ -83,17 +79,8 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                               color: Colors.white,
                             ),
                             IconButton(
-                              icon: Consumer<SavedNewsVM>(builder: (context, snVM, _){
-                                  switch(snVM.isSaved){
-                                    case true:
-                                        return const Icon(Icons.bookmark_outlined);
-                                    case false:
-                                      return const Icon(Icons.bookmark_border_outlined);
-                                    default:
-                                      return const Icon(Icons.bookmark_border_outlined);
-                                      //savedNumber != -1 ? const Icon(Icons.bookmark_outlined) : const Icon(Icons.bookmark_border_outlined),
-                                  }
-                              }),
+                              icon: snVM.isSaved ? const Icon(Icons.bookmark_outlined) :
+                              const Icon(Icons.bookmark_border_outlined),
                               onPressed: () async{
                                 _toggleSave(context);
                               },
@@ -107,12 +94,12 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                           children: <Widget>[
                             Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              const EdgeInsets.symmetric(horizontal: 16.0),
                               child: Container(
                                 decoration: const BoxDecoration(
                                   color: Color.fromRGBO(255, 255, 255, 0.3),
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
+                                  BorderRadius.all(Radius.circular(5)),
                                 ),
                                 padding: const EdgeInsets.all(10),
                                 child: Text(
@@ -133,7 +120,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                             Container(
                               width: dWidth,
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
+                              const EdgeInsets.symmetric(horizontal: 16),
                               child: Text(
                                   Util.articleText(widget.article.title),
                                   style: const TextStyle(
@@ -147,10 +134,10 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
+                              const EdgeInsets.symmetric(horizontal: 16),
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(children: <Widget>[
                                     Container(
@@ -174,7 +161,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                                   Text(
                                     widget.article.publishedAt != ""
                                         ? widget.article.publishedAt
-                                            .substring(0, 10)
+                                        .substring(0, 10)
                                         : 'Il y a 15 minutes',
                                     style: const TextStyle(
                                         color: Colors.white, fontSize: 14),
@@ -221,31 +208,31 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                       ],
                       if (widget.article.url != "") ...[
                         GestureDetector(
-                          onTap: () => _launchUrl(
-                              widget.article.url == "" ? "https://newsapi.org" : widget.article.url),
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Consulter la page de l'article",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
-                                    fontSize: 18,
-                                    overflow: TextOverflow.ellipsis,
-                                    color: Colors.blue,
-                                    decoration:
-                                    TextDecoration.underline,
+                            onTap: () => _launchUrl(
+                                widget.article.url == "" ? "https://newsapi.org" : widget.article.url),
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Consulter la page de l'article",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .copyWith(
+                                      fontSize: 18,
+                                      overflow: TextOverflow.ellipsis,
+                                      color: Colors.blue,
+                                      decoration:
+                                      TextDecoration.underline,
+                                    ),
                                   ),
-                                ),
-                                const Icon(Icons.launch, color: Colors.grey,)
-                              ],
-                            ),
-                          )
+                                  const Icon(Icons.launch, color: Colors.grey,)
+                                ],
+                              ),
+                            )
                         ),
                       ],
                       /*RichText(
@@ -264,7 +251,9 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
               ),
             ],
           ),
-        ));
+        );
+      }),
+    );
   }
 
   Future<void> _launchUrl(String url) async {
@@ -288,20 +277,11 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
   Future<void> _delete(BuildContext context) async {
     SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
-    setState(() {
-      savedNumber = snVM.currentArticle.id;
-    });
-    await snVM.deleteArticle(savedNumber);
+    await snVM.deleteCurrentArticle();
   }
 
   Future<void> _save(BuildContext context) async {
     SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
-    var articleID = await snVM.saveArticle();
-    if(articleID == -200) {
-      return;
-    }
-    setState(() {
-      savedNumber = articleID;
-    });
+    await snVM.saveArticle();
   }
 }

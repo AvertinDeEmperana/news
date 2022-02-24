@@ -17,11 +17,9 @@ class SearchResultScreen extends StatefulWidget {
 }
 
 class _SearchResultScreenState extends State<SearchResultScreen> {
-  QueryNewsListVM qnlVM = QueryNewsListVM();
   @override
   void initState() {
     super.initState();
-    qnlVM.fetchTopHeadlinesNews();
   }
 
   @override
@@ -41,9 +39,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
           ),
         ),
       ),
-      body: ChangeNotifierProvider<QueryNewsListVM>(
-        create: (context) => QueryNewsListVM(),
-        child: Consumer<QueryNewsListVM>(builder: (context, qnlVM, _) {
+      body: Consumer<QueryNewsListVM>(builder: (context, qnlVM, _) {
           switch (qnlVM.result.status) {
             case Status.LOADING:
               return const ShimmerNewsListWidget();
@@ -55,7 +51,6 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               return const ShimmerNewsListWidget();
           }
         }),
-      ),
     );
   }
 }

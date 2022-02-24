@@ -14,14 +14,14 @@ class SavedNewsVM extends ChangeNotifier {
   Future<void> loadArticles() async {
     var articles = await LocalDbHelper.getAllArticles();
     if(articles.isNotEmpty){
-        for(var article in articles){
-            if(!localDbArticles.contains(article)){
-                localDbArticles.add(article);
-                status = Status.COMPLETED;
-                getAllSavedArticleCount();
-                notifyListeners();
-            }
+      for(var article in articles){
+        if(!localDbArticles.contains(article)){
+          localDbArticles.add(article);
+          status = Status.COMPLETED;
+          getAllSavedArticleCount();
+          notifyListeners();
         }
+      }
     }
     if(localDbArticles.isEmpty){
       status = Status.NOTFOUND;
@@ -32,6 +32,8 @@ class SavedNewsVM extends ChangeNotifier {
   Future<int> saveArticle() async{
     var articleID = await LocalDbHelper.saveArticle(currentArticle);
     if(articleID == -200) {
+      isSaved = false;
+      notifyListeners();
       return -200;
     }
     else{
@@ -44,19 +46,24 @@ class SavedNewsVM extends ChangeNotifier {
   }
 
   Future<bool> deleteArticle(int i) async{
-    bool isDeleted = await LocalDbHelper.deleteArticleWithId(i);
-    if(isDeleted){
-        isSaved = false;
-        totalResults--;
-        localDbArticles.removeWhere((element) => element.id == i);
-        localDbArticles.isEmpty ? status = Status.NOTFOUND:'';
-        notifyListeners();
+    if(i==0){return false;}
+    if(await LocalDbHelper.deleteArticleWithId(i)){
+      isSaved = false;
+      totalResults--;
+      localDbArticles.removeWhere((element) => element.id == i);
+      localDbArticles.isEmpty ? status = Status.NOTFOUND:'';
+      notifyListeners();
+      return true;
     }
-    return isDeleted;
+    return false;
+  }
+
+  Future<bool> deleteCurrentArticle(){
+    return deleteArticle(currentArticle.id);
   }
 
   Future<Article?> loadFirstArticle() async {
-      return await LocalDbHelper.getArticleWithId(1);
+    return await LocalDbHelper.getArticleWithId(1);
   }
 
   Future<void> getAllSavedArticleCount() async {
@@ -67,12 +74,14 @@ class SavedNewsVM extends ChangeNotifier {
   Future<void> checkSavedStatus() async {
     isSaved = await LocalDbHelper.theDbContainsArticle(currentArticle);
     if(isSaved){
-        currentArticle.id = (await LocalDbHelper.getArticleIdWithTitle(currentArticle.title))!;
+      if(await LocalDbHelper.getArticleIdWithTitle(currentArticle.title) != null){
+        currentArticle.id  = (await LocalDbHelper.getArticleIdWithTitle(currentArticle.title))!;
+      }
     }
     notifyListeners();
   }
 
-  /*
+/*
   if(await LocalDbHelper.theDbContainsArticle(currentArticle)){
         currentArticle.id = (await LocalDbHelper.getArticleIdWithTitle(currentArticle.title))!;
     }

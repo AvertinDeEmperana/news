@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../Routes.gr.dart';
 import '../../model/Article.dart';
 import '../../util/Util.dart';
+import '../../view_model/SavedNewsVM.dart';
 
 class SingleArticleWidget extends StatelessWidget {
   final Article article;
@@ -13,6 +15,8 @@ class SingleArticleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
 
     void openDetailPage(Article article) {
+      SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
+      snVM.currentArticle = article;
       context.router.push(
           NewsDetailsScreenRoute(article: article)
       );
