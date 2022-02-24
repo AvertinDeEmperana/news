@@ -27,7 +27,7 @@ class CustomErrorWidget extends StatelessWidget {
                             Image.asset('assets/images/noconnection.png'),
                             SizedBox(
                                 width: MediaQuery.of(context).size.width -32,
-                                child: Text(errorText, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
+                                child: Text(errorText, textAlign: TextAlign.center, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
                             )
                         ],
                     ),
