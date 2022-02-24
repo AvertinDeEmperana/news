@@ -12,7 +12,6 @@ class SavedNewsVM extends ChangeNotifier {
   bool isSaved = false;
 
   Future<void> loadArticles() async {
-    print("Try to load articles");
     var articles = await LocalDbHelper.getAllArticles();
     if(articles.isNotEmpty){
         for(var article in articles){

@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import '../../../data/api/Status.dart';
 import '../../widget/CustomErrorWidget.dart';
 import '../../widget/NewsListWidget.dart';
+import '../../widget/NewsListWidgetTest.dart';
 
 class NewsListScreen extends StatefulWidget {
   const NewsListScreen({Key? key}) : super(key: key);
@@ -88,7 +89,7 @@ class _NewsListScreenState extends State<NewsListScreen> {
                     case Status.ERROR:
                         return CustomErrorWidget(theNewsVM: viewModel, errorText: /*viewModel.result.message ?? */ "Une erreur est survenue. Balayer l'écran pour actualiser ");
                     case Status.COMPLETED:
-                        return NewsListWidget(articles: viewModel.topHeadlines,);
+                        return NewsListWidgetTest<NewsListVM>(articles: viewModel.topHeadlines,);
                    default:
                         return const ShimmerNewsListWidget();
                 }

@@ -4,8 +4,9 @@ import '../data/api/ApiResponse.dart';
 import '../model/Article.dart';
 import '../model/Result.dart';
 import '../repository/NewsRepository.dart';
+import 'AbstractNewsListVM.dart';
 
-class NewsListVM extends ChangeNotifier {
+class NewsListVM extends ChangeNotifier implements AbstractNewsListVM {
   final _repo = NewsRepository();
   int page = 1;
   List<Article> topHeadlines = [];
@@ -15,6 +16,7 @@ class NewsListVM extends ChangeNotifier {
   ApiResponse<Result> result = ApiResponse.loading();
   ApiResponse<Result> otherResult = ApiResponse.loading();
 
+  @override
   Future<void> fetchTopHeadlinesNews() async {
     _setResult(ApiResponse.loading());
     _repo
@@ -30,6 +32,7 @@ class NewsListVM extends ChangeNotifier {
     result.data != null ? totalResults = result.data!.totalResults : 0 ;
   }
 
+  @override
   Future<void> updateListIfNewDataFetched() async{
     isQuerying = true;
     notifyListeners();
@@ -39,6 +42,7 @@ class NewsListVM extends ChangeNotifier {
         .onError((error, stackTrace) => _setResult(ApiResponse.error(error.toString())));
   }
 
+  @override
   void updateArticlesList(ApiResponse<Result> response){
     otherResult = response;
     topHeadlines.addAll(otherResult.data!.articles);

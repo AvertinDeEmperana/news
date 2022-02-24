@@ -6,9 +6,9 @@ import '../model/Result.dart';
 import '../repository/NewsRepository.dart';
 import 'AbstractNewsListVM.dart';
 
-class CategoryNewsListVM extends ChangeNotifier implements AbstractNewsListVM {
+class TestCategoryNewsListVM extends ChangeNotifier implements AbstractNewsListVM {
   late final category;
-  CategoryNewsListVM({required this.category});
+  TestCategoryNewsListVM({required this.category});
 
   final _repo = NewsRepository();
   int page = 1;

@@ -15,17 +15,17 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
   final tabs = <Tab>[
     const Tab(text: 'Sports'),
     const Tab(text: 'Technologie'),
-    const Tab(text: 'Science'),
+    /*const Tab(text: 'Science'),
     const Tab(text: 'Santé '),
-    const Tab(text: 'Divertissement '),
+    const Tab(text: 'Divertissement '),*/
   ];
 
   final tabPages = <Widget>[
       const ResultSetter(category: "sports"),
       const ResultSetter(category: "technology"),
-      const ResultSetter(category: "science"),
+      /*const ResultSetter(category: "science"),
       const ResultSetter(category: "health"),
-      const ResultSetter(category: "entertainment"),
+      const ResultSetter(category: "entertainment"),*/
   ];
 
   @override
@@ -41,11 +41,23 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
           backgroundColor: Colors.white,
           body: SafeArea(
               child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                         Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Column(children: [
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RichText(
+                                    overflow: TextOverflow.ellipsis,
+                                    text: TextSpan(
+                                      text: 'Actualité mondiale',
+                                      style: Theme.of(context).textTheme.headline1!.copyWith(fontWeight: FontWeight.w600),
+                                      children: const <TextSpan>[
+                                        TextSpan(text: '.', style: TextStyle(fontSize: 44)),
+                                      ],
+                                    ),
+                                  ),
                                 Text("Restez informés des dernières nouvelles", style: Theme.of(context).textTheme.bodyText2!.copyWith(fontWeight: FontWeight.w500)),
                                 const SizedBox(height: 10),
                                 /*Row(children: [Container(width: 40,height: 40,margin: const EdgeInsets.only(left: 10),
@@ -65,6 +77,7 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: TextField(
+                                    autofocus: false,
                                     onSubmitted: (keyword) {
                                       //Navigator.push(context, MaterialPageRoute(builder: (context) => FoundedArticle(articleFinder(keyword))));
                                     },
@@ -92,7 +105,19 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                             unselectedLabelStyle: Theme.of(context).textTheme.headline6!.copyWith(
                               color: AppTheme.lightShimmerGrey100Color,
                             ),
-                            tabs: tabs,
+                            tabs: <Widget>[
+                                SizedBox(
+                                  width: dSize.width / tabs.length,
+                                  child: Center(
+                                      child: tabs[0],
+                                  ),
+                                ),SizedBox(
+                                  width: dSize.width / tabs.length,
+                                  child: Center(
+                                      child: tabs[1],
+                                  ),
+                                ),
+                            ],
                             controller: _tabController,
                             indicatorSize: TabBarIndicatorSize.tab,
                         ),

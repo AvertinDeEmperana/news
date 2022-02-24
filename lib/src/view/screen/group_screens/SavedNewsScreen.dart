@@ -46,7 +46,7 @@ class _SavedNewsScreenState extends State<SavedNewsScreen> {
           case Status.LOADING:
             return const ShimmerNewsListWidget();
           case Status.NOTFOUND:
-            return const ArticlesNotFoundWidget(errorText: "Une erreur est survenue. Balayer l'écran pour actualiser ");
+            return const ArticlesNotFoundWidget(errorText: "Vous n'avez sauvegardé aucun article");
           case Status.COMPLETED:
             return SavedNewsListWidget(articles: snVM.localDbArticles);
           default:
