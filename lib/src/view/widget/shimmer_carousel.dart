@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
 import '../../app_theme.dart';
 
 class ShimmerCarousel extends StatelessWidget {

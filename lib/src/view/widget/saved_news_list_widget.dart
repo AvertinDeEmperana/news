@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:news/src/util/util.dart';
 import 'package:news/src/view_model/saved_news_vm.dart';
 import 'package:provider/provider.dart';
-
 import '../../data/api/status.dart';
 import '../../model/article.dart';
 import 'nlvbldr.dart';

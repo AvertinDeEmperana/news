@@ -4,9 +4,6 @@ import 'package:provider/provider.dart';
 import '../../data/api/status.dart';
 import '../../model/article.dart';
 import '../../util/util.dart';
-import '../../view_model/news_list_vm.dart';
-import '../../view_model/category_news_vm.dart';
-import '../../view_model/abstract_news_vm.dart';
 import 'nlvbldr.dart';
 
 class NewsListWidget<AbstractNewsListVM> extends StatefulWidget {

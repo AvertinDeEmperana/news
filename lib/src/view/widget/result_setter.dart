@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/src/view_model/category_news_vm.dart';
 import 'package:provider/provider.dart';
-
 import '../../data/api/status.dart';
 import 'custom_error_widget.dart';
 import 'news_list_widget.dart';
