@@ -3,11 +3,8 @@ import 'package:news/src/view_model/CategoryNewsListVM.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/api/Status.dart';
-import '../../model/Article.dart';
-import '../../view_model/NewsListVM.dart';
 import 'CustomErrorWidget.dart';
 import 'NewsListWidget.dart';
-import 'NewsListWidgetTest.dart';
 import 'ShimmerNewsListWidget.dart';
 
 class ResultSetter extends StatefulWidget {
@@ -40,7 +37,7 @@ class _ResultSetterState extends State<ResultSetter> {
                 return CustomErrorWidget(theNewsVM: cnlVM, errorText: /*viewModel.result.message ?? */ "Une erreur est survenue. Balayer l'écran pour actualiser ");
               case Status.COMPLETED:
                 //return NewsListWidget(articles: cnlVM.topHeadlines,);
-                return NewsListWidgetTest<CategoryNewsListVM>(articles: cnlVM.topHeadlines,);
+                return NewsListWidget<CategoryNewsListVM>(articles: cnlVM.topHeadlines,);
               default:
                 return const ShimmerNewsListWidget();
             }
