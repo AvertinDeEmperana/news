@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../../Routes.gr.dart';
+import '../../../routes.gr.dart';
 
 class GroupScreen extends StatelessWidget {
   final String id;
-  const GroupScreen({Key? key, @PathParam('id') required this.id}) : super(key: key);
 
+  const GroupScreen({Key? key, @PathParam('id') required this.id})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +33,15 @@ class GroupScreen extends StatelessWidget {
                   topRight: Radius.circular(20.0),
                 ),
                 child: buildBottomNavigationBar(context, tabsRouter),
-              )
-          );
+              ));
         },
       ),
     );
   }
 }
 
-BottomNavigationBar buildBottomNavigationBar(BuildContext context, TabsRouter tabsRouter) {
+BottomNavigationBar buildBottomNavigationBar(
+    BuildContext context, TabsRouter tabsRouter) {
   return BottomNavigationBar(
     type: BottomNavigationBarType.fixed,
     backgroundColor: const Color(0xFF1A1A1A),
@@ -52,12 +53,14 @@ BottomNavigationBar buildBottomNavigationBar(BuildContext context, TabsRouter ta
     selectedItemColor: Colors.white,
     unselectedItemColor: Colors.grey,
     items: const [
-      BottomNavigationBarItem(activeIcon: Icon(Icons.home_rounded),
+      BottomNavigationBarItem(
+          activeIcon: Icon(Icons.home_rounded),
           icon: Icon(Icons.home_outlined),
           label: 'Accueil'),
       BottomNavigationBarItem(
           icon: Icon(Icons.search_rounded), label: 'Rechercher'),
-      BottomNavigationBarItem(activeIcon: Icon(Icons.bookmark),
+      BottomNavigationBarItem(
+          activeIcon: Icon(Icons.bookmark),
           icon: Icon(Icons.bookmark_border_outlined),
           label: 'Enregistrés'),
     ],

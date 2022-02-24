@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:news/src/view/widget/SavedNewsListWidget.dart';
+import 'package:news/src/view/widget/saved_news_list_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../../data/api/Status.dart';
-import '../../../view_model/SavedNewsVM.dart';
-import '../../widget/ArticlesNotFoundWidget.dart';
-import '../../widget/ShimmerNewsListWidget.dart';
+import '../../../data/api/status.dart';
+import '../../../view_model/saved_news_vm.dart';
+import '../../widget/articles_not_found_widget.dart';
+import '../../widget/shimmer_news_list_widget.dart';
 
 class SavedNewsScreen extends StatefulWidget {
   const SavedNewsScreen({Key? key}) : super(key: key);
@@ -15,7 +15,6 @@ class SavedNewsScreen extends StatefulWidget {
 }
 
 class _SavedNewsScreenState extends State<SavedNewsScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -34,7 +33,10 @@ class _SavedNewsScreenState extends State<SavedNewsScreen> {
           overflow: TextOverflow.ellipsis,
           text: TextSpan(
             text: 'Articles enregistrés',
-            style: Theme.of(context).textTheme.headline1!.copyWith(fontWeight: FontWeight.w600),
+            style: Theme.of(context)
+                .textTheme
+                .headline1!
+                .copyWith(fontWeight: FontWeight.w600),
             children: const <TextSpan>[
               TextSpan(text: '.', style: TextStyle(fontSize: 44)),
             ],
@@ -46,7 +48,8 @@ class _SavedNewsScreenState extends State<SavedNewsScreen> {
           case Status.LOADING:
             return const ShimmerNewsListWidget();
           case Status.NOTFOUND:
-            return const ArticlesNotFoundWidget(errorText: "Vous n'avez sauvegardé aucun article");
+            return const ArticlesNotFoundWidget(
+                errorText: "Vous n'avez sauvegardé aucun article");
           case Status.COMPLETED:
             return SavedNewsListWidget(articles: snVM.localDbArticles);
           default:

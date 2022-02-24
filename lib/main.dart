@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news/src/data/local/ObjectBox.dart';
-import 'src/App.dart';
+import 'package:news/src/data/local/object_box.dart';
+import 'src/app.dart';
 
 late ObjectBox objectbox;
 
