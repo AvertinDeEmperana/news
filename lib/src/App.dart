@@ -43,7 +43,7 @@ class _AppState extends State<App> {
           ChangeNotifierProvider<SavedNewsVM>(create: (BuildContext context) => SavedNewsVM()),
       ],
       child: MaterialApp.router(
-        debugShowCheckedModeBanner: true,
+        debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         title: "Your news App",
         routerDelegate: widget._appRouter.delegate(),

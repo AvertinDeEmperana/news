@@ -1,6 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:news/src/App_Theme.dart';
+import 'package:news/src/Routes.gr.dart';
 import 'package:news/src/view/widget/ResultSetter.dart';
+import 'package:news/src/view_model/QueryNewsListVM.dart';
+import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -11,6 +15,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderStateMixin  {
   late TabController _tabController;
+  late TextEditingController _controller;
 
   final tabs = <Tab>[
     const Tab(text: 'Sports'),
@@ -31,13 +36,21 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
   @override
   void initState() {
     _tabController = TabController(length: tabs.length, vsync: this);
+    _controller = TextEditingController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
       Size dSize = MediaQuery.of(context).size;
       return Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
           body: SafeArea(
               child: Column(
@@ -77,10 +90,13 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: TextField(
-                                    autofocus: false,
-                                    onSubmitted: (keyword) {
-                                      //Navigator.push(context, MaterialPageRoute(builder: (context) => FoundedArticle(articleFinder(keyword))));
+                                    controller: _controller,
+                                    onSubmitted: (String value) {
+                                      search(value);
                                     },
+                                    cursorColor: Theme.of(context).colorScheme.secondary,
+                                    autofocus: false,
+                                    keyboardType: TextInputType.text,
                                     style: const TextStyle(fontSize:16),
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
@@ -132,4 +148,11 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
           ),
       );
     }
+
+  Future<void> search(String keyword) async {
+    if(keyword.isEmpty){
+        return;
+    }
+    context.router.push(SearchResultScreenRoute(keyword: keyword));
+  }
 }

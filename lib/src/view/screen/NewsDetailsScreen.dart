@@ -27,9 +27,9 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     super.initState();
     SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
     snVM.loadArticles();
+    snVM.checkSavedStatus();
     snVM.currentArticle = widget.article;
     //snVM.isSaved ? savedNumber = widget.article.id : '';
-    snVM.checkSavedStatus();
   }
 
 

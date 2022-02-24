@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:news/src/view/screen/NewsDetailsScreen.dart';
+import 'package:news/src/view/screen/SearchResultScreen.dart';
 import 'package:news/src/view/screen/SplashScreen.dart';
 import 'package:news/src/view/screen/group_screens/GroupScreen.dart';
 import 'package:news/src/view/screen/group_screens/NewsListScreen.dart';
@@ -11,6 +12,7 @@ import 'package:news/src/view/screen/group_screens/SearchScreen.dart';
   routes: <AutoRoute>[
     AutoRoute(path: 'splash', page: SplashScreen, initial: true),
     AutoRoute(path: 'newsdetails/:article', page: NewsDetailsScreen),
+    AutoRoute(path: 'searchresult/:keyword', page: SearchResultScreen),
     groupTabRouter,
   ],
 )

@@ -11,6 +11,7 @@ class GroupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: AutoTabsRouter(
         routes: const [
           NewsListRouter(),
@@ -41,6 +42,7 @@ class GroupScreen extends StatelessWidget {
 
 BottomNavigationBar buildBottomNavigationBar(BuildContext context, TabsRouter tabsRouter) {
   return BottomNavigationBar(
+    type: BottomNavigationBarType.fixed,
     backgroundColor: const Color(0xFF1A1A1A),
     onTap: tabsRouter.setActiveIndex,
     currentIndex: tabsRouter.activeIndex,
