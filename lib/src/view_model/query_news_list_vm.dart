@@ -17,17 +17,22 @@ class QueryNewsListVM extends ChangeNotifier implements AbstractNewsListVM {
   ApiResponse<Result> result = ApiResponse.loading();
   ApiResponse<Result> otherResult = ApiResponse.loading();
 
+  Future<void> search(String keyword) async {
+      if(keyword != currentKeyword){
+        currentKeyword = keyword;
+        topHeadlines.clear();
+      }
+      await fetchTopHeadlinesNews();
+  }
+
   @override
   Future<void> fetchTopHeadlinesNews() async {
-    print("querying");
     _setResult(ApiResponse.loading());
-    print("Set response to loading");
     _repo
         .getEverythingNewsList(currentKeyword, page)
         .then((value) => _setResult(ApiResponse.completed(value)))
         .onError((error, stackTrace) =>
             _setResult(ApiResponse.error(error.toString())));
-    print("Set response to loading");
   }
 
   Future<void> _setResult(ApiResponse<Result> response) async {
