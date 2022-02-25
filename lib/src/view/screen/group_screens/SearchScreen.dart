@@ -171,8 +171,7 @@ class _SearchScreenState extends State<SearchScreen>
     }
     QueryNewsListVM qnlVM =
         Provider.of<QueryNewsListVM>(context, listen: false);
-    qnlVM.currentKeyword = keyword;
-    qnlVM.fetchTopHeadlinesNews();
+    await qnlVM.search(keyword);
     context.router.push(SearchResultScreenRoute(keyword: keyword));
   }
 }

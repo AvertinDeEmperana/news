@@ -59,8 +59,8 @@ class SavedNewsVM extends ChangeNotifier {
     return false;
   }
 
-  Future<bool> deleteCurrentArticle() {
-    return deleteArticle(currentArticle.id);
+  Future<bool> deleteCurrentArticle() async {
+    return await deleteArticle(currentArticle.id);
   }
 
   Future<Article?> loadFirstArticle() async {

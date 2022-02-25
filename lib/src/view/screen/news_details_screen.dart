@@ -285,6 +285,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
   Future<void> _save(BuildContext context) async {
     SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
-    await snVM.saveArticle();
+    int newId = await snVM.saveArticle();
+    newId != -200 ? widget.article.id = newId : '';
   }
 }

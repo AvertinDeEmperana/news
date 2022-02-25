@@ -29,21 +29,6 @@ class ArticleEntity {
     );
   }
 
-/*ArticleEntity(Article article){
-      SourceEntity theSourceEntity = SourceEntity();
-      theSourceEntity.stringId = article.source.id;
-      theSourceEntity.name = article.source.name;
-
-      author = article.author;
-      title = article.title;
-      description = article.description;
-      url = article.url;
-      urlToImage = article.urlToImage;
-      publishedAt = article.publishedAt;
-      content = article.content;
-      sourceEntity.target = theSourceEntity;
-  }*/
-
 }
 
 extension ArticleExtension on Article {
