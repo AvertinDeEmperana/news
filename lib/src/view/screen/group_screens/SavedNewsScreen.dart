@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news/src/app_theme.dart';
 import 'package:news/src/view/widget/saved_news_list_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +39,7 @@ class _SavedNewsScreenState extends State<SavedNewsScreen> {
                 .headline1!
                 .copyWith(fontWeight: FontWeight.w600),
             children: const <TextSpan>[
-              TextSpan(text: '.', style: TextStyle(fontSize: 44)),
+              TextSpan(text: '.', style: TextStyle(fontSize: 44, color: AppTheme.rrose)),
             ],
           ),
         ),

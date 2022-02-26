@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:news/src/app_theme.dart';
 import 'package:news/src/routes.gr.dart';
-import 'package:news/src/view/widget/result_setter.dart';
+import 'package:news/src/view/widget/result_setter_widget.dart';
 import 'package:news/src/view_model/query_news_list_vm.dart';
 import 'package:provider/provider.dart';
 
@@ -71,7 +71,7 @@ class _SearchScreenState extends State<SearchScreen>
                             .headline1!
                             .copyWith(fontWeight: FontWeight.w600),
                         children: const <TextSpan>[
-                          TextSpan(text: '.', style: TextStyle(fontSize: 44)),
+                          TextSpan(text: '.', style: TextStyle(fontSize: 44, color: AppTheme.rrose)),
                         ],
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:news/src/app_theme.dart';
 
 import '../../../routes.gr.dart';
 
@@ -44,6 +45,7 @@ BottomNavigationBar buildBottomNavigationBar(
     BuildContext context, TabsRouter tabsRouter) {
   return BottomNavigationBar(
     type: BottomNavigationBarType.fixed,
+    //backgroundColor: AppTheme.rrose,
     backgroundColor: const Color(0xFF1A1A1A),
     onTap: tabsRouter.setActiveIndex,
     currentIndex: tabsRouter.activeIndex,

@@ -22,6 +22,7 @@ class SavedNewsVM extends ChangeNotifier {
           notifyListeners();
         }
       }
+      print(articles[0].isSaved);
     }
     if (localDbArticles.isEmpty) {
       status = Status.NOTFOUND;
@@ -29,8 +30,8 @@ class SavedNewsVM extends ChangeNotifier {
     }
   }
 
-  Future<int> saveArticle() async {
-    var articleID = await LocalDbHelper.saveArticle(currentArticle);
+  Future<int> saveArticle(Article article) async {
+    var articleID = await LocalDbHelper.saveArticle(article);
     if (articleID == -200) {
       isSaved = false;
       notifyListeners();
@@ -81,6 +82,11 @@ class SavedNewsVM extends ChangeNotifier {
             (await LocalDbHelper.getArticleIdWithTitle(currentArticle.title))!;
       }
     }
+    notifyListeners();
+  }
+
+  void reinitializeIsChecked(){
+    isSaved = false;
     notifyListeners();
   }
 

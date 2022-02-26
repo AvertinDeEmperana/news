@@ -9,8 +9,8 @@ import '../../util/util.dart';
 import '../../view_model/news_list_vm.dart';
 import '../../view_model/saved_news_vm.dart';
 
-class NewsListCarousel extends StatelessWidget {
-  const NewsListCarousel({Key? key}) : super(key: key);
+class NewsDetailsNewsListCarousel extends StatelessWidget {
+  const NewsDetailsNewsListCarousel({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,8 @@ class NewsListCarousel extends StatelessWidget {
           onTap: () => showDetails(theNewsListVM.topHeadlines[index]),
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 10),
-            width: 300,
-            // height: 250,
+            width: 335,
+            height: 250,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
@@ -47,8 +47,8 @@ class NewsListCarousel extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  width: 300,
-                  height: 150,
+                  width: 335,
+                  height: 140,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
@@ -88,13 +88,13 @@ class NewsListCarousel extends StatelessWidget {
                         Text(
                           theNewsListVM.topHeadlines[index].source.name != ""
                               ? theNewsListVM.topHeadlines[index].source.name
-                                          .length >=
-                                      15
-                                  ? theNewsListVM
-                                      .topHeadlines[index].source.name
-                                      .substring(0, 15)
-                                  : theNewsListVM
-                                      .topHeadlines[index].source.name
+                              .length >=
+                              15
+                              ? theNewsListVM
+                              .topHeadlines[index].source.name
+                              .substring(0, 15)
+                              : theNewsListVM
+                              .topHeadlines[index].source.name
                               : 'Source inconnue',
                           style: Theme.of(context).textTheme.caption,
                           overflow: TextOverflow.clip,
@@ -103,7 +103,7 @@ class NewsListCarousel extends StatelessWidget {
                       Text(
                         theNewsListVM.topHeadlines[index].publishedAt != ""
                             ? theNewsListVM.topHeadlines[index].publishedAt
-                                .substring(0, 10)
+                            .substring(0, 10)
                             : 'Il y a 15 minutes',
                         style: Theme.of(context).textTheme.caption,
                         overflow: TextOverflow.clip,
@@ -117,14 +117,16 @@ class NewsListCarousel extends StatelessWidget {
         );
       },
       options: CarouselOptions(
-        height: 280,
+        height: 270,
         aspectRatio: 16 / 9,
-        autoPlay: false,
+        autoPlay: true,
         enlargeCenterPage: true,
         autoPlayCurve: Curves.fastOutSlowIn,
-        enableInfiniteScroll: true,
-        autoPlayAnimationDuration: const Duration(seconds: 6),
-        viewportFraction: 0.8,
+        enableInfiniteScroll: false,
+        //autoPlayAnimationDuration: const Duration(seconds: 2),
+        autoPlayInterval: const Duration(seconds: 8),
+        pauseAutoPlayOnManualNavigate: true,
+        viewportFraction: 0.9,
       ),
     );
   }

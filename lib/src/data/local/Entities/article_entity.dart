@@ -12,6 +12,7 @@ class ArticleEntity {
   late String urlToImage;
   late String publishedAt;
   late String content;
+  late bool isSaved;
 
   final sourceEntity = ToOne<SourceEntity>();
 
@@ -25,6 +26,7 @@ class ArticleEntity {
       publishedAt: publishedAt,
       title: title,
       id: id,
+      isSaved: true,
       source: sourceEntity.target!.toSource(),
     );
   }

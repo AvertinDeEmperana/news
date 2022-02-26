@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:news/src/view/widget/nd_news_list_carousel.dart';
+import 'package:news/src/view_model/news_list_vm.dart';
 import 'package:news/src/view_model/saved_news_vm.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../app_theme.dart';
 import '../../model/article.dart';
 import '../../util/util.dart';
 
 class NewsDetailsScreen extends StatefulWidget {
   Article article;
-
   NewsDetailsScreen({Key? key, required this.article}) : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         tooltip: "Partager l'article",
+        //backgroundColor: AppTheme.rrose,
         backgroundColor: Colors.black87,
         onPressed: () => widget.article.url.isEmpty ? null : _onShare(context),
         child: const Icon(
@@ -181,73 +184,71 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
               // ),
               Positioned(
                 top: 380,
-                height: 500,
+                height: 450,
                 child: Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(22),
-                        topRight: Radius.circular(22)),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(22), topRight: Radius.circular(22)),
                   ),
                   width: dWidth,
-                  padding: const EdgeInsets.only(
-                      top: 20, bottom: 10, left: 16, right: 16),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10, left: 16, right: 16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      if (widget.article.description != "") ...[
-                        Text(
-                          Util.articleText(widget.article.description),
-                          textAlign: TextAlign.justify,
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                      ],
+                      SizedBox(
+                          height: 80,
+                          child: Scrollbar(
+                            child: ListView(
+                              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                              padding: EdgeInsets.zero,
+                              children: [
+                                if (widget.article.description != "") ...[
+                                  Text(
+                                    Util.articleText(widget.article.description),
+                                    textAlign: TextAlign.justify,
+                                    style: Theme.of(context).textTheme.bodyText2,
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                ],
+                              ],
+                            ),
+                          )
+                      ),
                       if (widget.article.url != "") ...[
                         GestureDetector(
-                            onTap: () => _launchUrl(widget.article.url == ""
-                                ? "https://newsapi.org"
-                                : widget.article.url),
+                            onTap: () => _launchUrl(widget.article.url == "" ? "https://newsapi.org" : widget.article.url),
                             child: Container(
                               margin: const EdgeInsets.symmetric(vertical: 8.0),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    "Consulter la page de l'article",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1!
-                                        .copyWith(
-                                          fontSize: 18,
-                                          overflow: TextOverflow.ellipsis,
-                                          color: Colors.blue,
-                                          decoration: TextDecoration.underline,
-                                        ),
-                                  ),
-                                  const Icon(
-                                    Icons.launch,
-                                    color: Colors.grey,
-                                  )
+                                  Text( "Consulter la page de l'article", style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 18,overflow: TextOverflow.ellipsis, color: Colors.blue, decoration: TextDecoration.underline)),
+                                  const Icon(Icons.launch, color: Colors.grey)
                                 ],
                               ),
-                            )),
+                            )
+                        ),
                       ],
-                      /*RichText(
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                            text: 'Autres articles',
-                            style: Theme.of(context).textTheme.headline1!.copyWith(letterSpacing: 0.2),
-                            children: const <TextSpan>[
-                              TextSpan(text: '.', style: TextStyle(fontSize: 40)),
-                            ],
+                      Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'Autres articles',
+                                  style: Theme.of(context).textTheme.headline1!.copyWith(letterSpacing: 0.2, fontWeight: FontWeight.w600),
+                                  textAlign: TextAlign.end,
+                                ),
+                                Consumer<NewsListVM>(builder: (context, nlVM, _) {
+                                  return const NewsDetailsNewsListCarousel();
+                                }),
+                              ],
                           ),
-                      ),*/
+                      )
                     ],
                   ),
                 ),
@@ -285,7 +286,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
   Future<void> _save(BuildContext context) async {
     SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
-    int newId = await snVM.saveArticle();
+    int newId = await snVM.saveArticle(snVM.currentArticle);
     newId != -200 ? widget.article.id = newId : '';
   }
 }

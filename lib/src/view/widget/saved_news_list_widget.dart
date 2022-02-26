@@ -70,10 +70,6 @@ class _SavedNewsListWidgetState extends State<SavedNewsListWidget> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Nlvbldr(
-      theScrollController: theScrollController,
-      isLoading: isLoading,
-      articles: widget.articles,
-    ));
+        child: Nlvbldr(theScrollController: theScrollController, isLoading: isLoading, articles: widget.articles, isChildDismmisible: true, ));
   }
 }

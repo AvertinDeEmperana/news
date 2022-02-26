@@ -2,6 +2,7 @@
 
 //import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:news/src/app_theme.dart';
 import 'package:news/src/view/widget/shimmer_news_list_widget.dart';
 import 'package:news/src/view_model/news_list_vm.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,7 @@ class _NewsListScreenState extends State<NewsListScreen> {
                 .headline1!
                 .copyWith(fontWeight: FontWeight.w600),
             children: const <TextSpan>[
-              TextSpan(text: '.', style: TextStyle(fontSize: 44)),
+              TextSpan(text: '.', style: TextStyle(fontSize: 44, color: AppTheme.rrose)),
             ],
           ),
         ),

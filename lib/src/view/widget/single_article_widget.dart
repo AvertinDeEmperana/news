@@ -15,9 +15,10 @@ class SingleArticleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void openDetailPage(Article article) {
-      SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
-      snVM.currentArticle = article;
-      context.router.push(NewsDetailsScreenRoute(article: article));
+        SavedNewsVM snVM = Provider.of<SavedNewsVM>(context, listen: false);
+        snVM.currentArticle = article;
+        snVM.reinitializeIsChecked();
+        context.router.push(NewsDetailsScreenRoute(article: article));
     }
 
     return InkWell(

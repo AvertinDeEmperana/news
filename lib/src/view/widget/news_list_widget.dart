@@ -43,8 +43,7 @@ class _NewsListWidget<AbstractNewsListVM>
   @override
   void initState() {
     super.initState();
-    AbstractNewsListVM abnlVM =
-        Provider.of<AbstractNewsListVM>(context, listen: false);
+    AbstractNewsListVM abnlVM = Provider.of<AbstractNewsListVM>(context, listen: false);
     vm = abnlVM;
     theScrollController.addListener(() async {
       if (theScrollController.position.pixels ==
@@ -63,10 +62,6 @@ class _NewsListWidget<AbstractNewsListVM>
 
   @override
   Widget build(BuildContext context) {
-    return Nlvbldr(
-      theScrollController: theScrollController,
-      isLoading: isLoading,
-      articles: widget.articles,
-    );
+    return Nlvbldr(theScrollController: theScrollController, isLoading: isLoading, articles: widget.articles, isChildDismmisible: false,);
   }
 }

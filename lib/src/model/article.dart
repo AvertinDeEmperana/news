@@ -12,6 +12,7 @@ class Article extends Equatable {
   late final String urlToImage;
   late final String publishedAt;
   late final String content;
+  bool isSaved = false;
 
   Article(
       {required this.source,
@@ -32,7 +33,8 @@ class Article extends Equatable {
       required this.url,
       required this.urlToImage,
       required this.publishedAt,
-      required this.content});
+      required this.content,
+        required this.isSaved});
 
   Article.fromJson(Map<String, dynamic> json) {
     source = Source.fromJson(json['source'] ?? Source(id: "", name: ""));
