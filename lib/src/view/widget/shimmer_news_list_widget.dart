@@ -21,47 +21,52 @@ class ShimmerNewsListWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 110,
-                    height: 110,
-                    color: Colors.white,
+                  Expanded(
+                      flex: 1,
+                      child: Container(
+                        width: 110,
+                        height: 110,
+                        color: Colors.white,
+                      ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    width: 225,
-                    height: 90,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Column(children: [
-                          Container(
-                            width: double.infinity,
-                            height: 8,
-                            color: Colors.white,
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 8,
-                            color: Colors.white,
-                          ),
-                        ]),
-                        Row(
+                  Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        width: 225,
+                        height: 90,
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: 20,
-                              height: 8,
-                              color: Colors.white,
-                            ),
-                            Container(
-                              width: 20,
-                              height: 8,
-                              color: Colors.white,
+                          children: <Widget>[
+                            Column(children: [
+                              Container(
+                                width: double.infinity,
+                                height: 8,
+                                color: Colors.white,
+                              ),
+                              Container(
+                                width: double.infinity,
+                                height: 8,
+                                color: Colors.white,
+                              ),
+                            ]),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: 20,
+                                  height: 8,
+                                  color: Colors.white,
+                                ),
+                                Container(
+                                  width: 20,
+                                  height: 8,
+                                  color: Colors.white,
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
                   ),
                 ],
               ),
