@@ -34,6 +34,11 @@ class DismissArticlewidget extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: const Icon(Icons.delete),
         ),
+      secondaryBackground: Container(
+        color: AppTheme.rrose,
+        alignment: Alignment.centerRight,
+        child: const Icon(Icons.delete),
+      ),
     );
   }
 }
