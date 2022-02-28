@@ -4,9 +4,9 @@ import 'package:news/src/view/widget/single_article_widget.dart';
 import 'package:news/src/view_model/saved_news_vm.dart';
 import 'package:provider/provider.dart';
 
-class DismissArticlewidget extends StatelessWidget {
+class DismissArticleWidget extends StatelessWidget {
   final SingleArticleWidget articleWidget;
-  const DismissArticlewidget({Key? key, required this.articleWidget}) : super(key: key);
+  const DismissArticleWidget({Key? key, required this.articleWidget}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

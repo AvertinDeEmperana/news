@@ -89,12 +89,4 @@ class SavedNewsVM extends ChangeNotifier {
     isSaved = false;
     notifyListeners();
   }
-
-/*
-  if(await LocalDbHelper.theDbContainsArticle(currentArticle)){
-        currentArticle.id = (await LocalDbHelper.getArticleIdWithTitle(currentArticle.title))!;
-    }
-    notifyListeners();
-   */
-
 }

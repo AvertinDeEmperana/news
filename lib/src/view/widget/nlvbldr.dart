@@ -21,7 +21,7 @@ class Nlvbldr extends StatelessWidget {
           itemCount: articles!.length,
           itemBuilder: ((context, index) {
             if(isChildDismmisible){
-              return DismissArticlewidget(articleWidget: SingleArticleWidget(article: articles![index]),);
+              return DismissArticleWidget(articleWidget: SingleArticleWidget(article: articles![index]),);
             }
             return SingleArticleWidget(article: articles![index]);
           })),

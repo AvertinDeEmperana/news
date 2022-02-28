@@ -35,7 +35,8 @@ class SingleArticleWidget extends StatelessWidget {
                 flex: 1,
                 child: Container(
                   //width: 110,
-                  height: 120,
+                  height: 110,
+                  margin: const EdgeInsets.only(right: 16),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     image: DecorationImage(
@@ -45,7 +46,7 @@ class SingleArticleWidget extends StatelessWidget {
                   ),
                 ),
             ),
-            const SizedBox(width: 16),
+            //const SizedBox(width: 16),
             Expanded(
                 flex: 2,
                 child: Container(

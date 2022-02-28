@@ -24,15 +24,17 @@ class ShimmerNewsListWidget extends StatelessWidget {
                   Expanded(
                       flex: 1,
                       child: Container(
-                        width: 110,
+                        //width: 110,
+                        margin: const EdgeInsets.only(right: 16),
                         height: 110,
                         color: Colors.white,
                       ),
                   ),
                   Expanded(
+                    flex: 2,
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),
-                        width: 225,
+                        //width: 225,
                         height: 90,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
