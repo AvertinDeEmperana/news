@@ -31,51 +31,57 @@ class SingleArticleWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: 110,
-              height: 110,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                image: DecorationImage(
-                  image: Util.articleImage(article.urlToImage),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              width: 250,
-              height: 100,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    article.title,
-                    style: Theme.of(context).textTheme.headline6,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+            Expanded(
+                flex: 1,
+                child: Container(
+                  //width: 110,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    image: DecorationImage(
+                      image: Util.articleImage(article.urlToImage),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  Row(
+                ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+                flex: 2,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  //width: 250,
+                  height: 110,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                    children: <Widget>[
                       Text(
-                        article.source.name,
-                        style: Theme.of(context).textTheme.caption,
+                        article.title,
+                        style: Theme.of(context).textTheme.headline6,
                         overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
                       ),
-                      Text(
-                        article.publishedAt != ""
-                            ? article.publishedAt.substring(0, 10)
-                            : 'Il y a 15 minutes',
-                        style: Theme.of(context).textTheme.caption,
-                        overflow: TextOverflow.clip,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            article.source.name,
+                            style: Theme.of(context).textTheme.caption,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            article.publishedAt != ""
+                                ? article.publishedAt.substring(0, 10)
+                                : 'Il y a 15 minutes',
+                            style: Theme.of(context).textTheme.caption,
+                            overflow: TextOverflow.clip,
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
+                ),
+            )
           ],
         ),
       ),

@@ -41,7 +41,7 @@ class _ResultSetterState extends State<ResultSetter> {
           case Status.COMPLETED:
             //return NewsListWidget(articles: cnlVM.topHeadlines,);
             return NewsListWidget<CategoryNewsListVM>(
-              articles: cnlVM.topHeadlines,
+              articles: cnlVM.articles,
             );
           default:
             return const ShimmerNewsListWidget();

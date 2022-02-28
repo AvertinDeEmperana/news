@@ -124,8 +124,10 @@ class _SearchScreenState extends State<SearchScreen>
             ),
             TabBar(
               indicatorWeight: 3,
-              indicatorColor: Theme.of(context).colorScheme.secondary,
-              labelColor: Theme.of(context).colorScheme.secondary,
+              indicatorColor: AppTheme.rrose,
+              //indicatorColor: Theme.of(context).colorScheme.secondary,
+              labelColor: AppTheme.rrose,
+              //labelColor: Theme.of(context).colorScheme.secondary,
               unselectedLabelColor: Colors.grey,
               isScrollable: true,
               labelStyle: Theme.of(context).textTheme.headline6!.copyWith(
