@@ -48,7 +48,7 @@ class _NewsListScreenState extends State<NewsListScreen> {
                 errorText: /*viewModel.result.message ?? */ "Une erreur est survenue. Balayer l'écran pour actualiser ");
           case Status.COMPLETED:
             return NewsListWidget<NewsListVM>(
-              articles: viewModel.topHeadlines,
+              articles: viewModel.articles,
             );
           default:
             return const ShimmerNewsListWidget();

@@ -9,7 +9,7 @@ import 'abstract_news_vm.dart';
 class NewsListVM extends ChangeNotifier implements AbstractNewsListVM {
   final _repo = NewsRepository();
   int page = 1;
-  List<Article> topHeadlines = [];
+  List<Article> articles = [];
   int totalResults = 0;
   bool isQuerying = false;
 
@@ -29,7 +29,7 @@ class NewsListVM extends ChangeNotifier implements AbstractNewsListVM {
   Future<void> _setResult(ApiResponse<Result> response) async {
     result = response;
     notifyListeners();
-    result.data != null ? topHeadlines.addAll(result.data!.articles) : "";
+    result.data != null ? articles.addAll(result.data!.articles) : "";
     result.data != null ? totalResults = result.data!.totalResults : 0;
   }
 
@@ -47,7 +47,7 @@ class NewsListVM extends ChangeNotifier implements AbstractNewsListVM {
   @override
   void updateArticlesList(ApiResponse<Result> response) {
     otherResult = response;
-    topHeadlines.addAll(otherResult.data!.articles);
+    articles.addAll(otherResult.data!.articles);
     notifyListeners();
   }
 }

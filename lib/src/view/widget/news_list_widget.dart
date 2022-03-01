@@ -36,7 +36,7 @@ class _NewsListWidget<AbstractNewsListVM>
     await Future.delayed(const Duration(seconds: 2));
     setState(() {
       isLoading = false;
-      allLoaded = vm!.topHeadlines.length == vm!.totalResults;
+      allLoaded = vm!.articles.length == vm!.totalResults;
     });
   }
 

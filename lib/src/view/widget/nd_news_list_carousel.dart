@@ -23,11 +23,11 @@ class NewsDetailsNewsListCarousel extends StatelessWidget {
     }
 
     return CarouselSlider.builder(
-      itemCount: theNewsListVM.topHeadlines.length,
+      itemCount: theNewsListVM.articles.length,
       itemBuilder: (context, index, realIdx) {
         return InkWell(
           enableFeedback: true,
-          onTap: () => showDetails(theNewsListVM.topHeadlines[index]),
+          onTap: () => showDetails(theNewsListVM.articles[index]),
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 10),
             width: 335,
@@ -53,14 +53,14 @@ class NewsDetailsNewsListCarousel extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
                         image: Util.articleImage(
-                            theNewsListVM.topHeadlines[index].urlToImage),
+                            theNewsListVM.articles[index].urlToImage),
                         fit: BoxFit.cover),
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
-                    theNewsListVM.topHeadlines[index].title,
+                    theNewsListVM.articles[index].title,
                     style: Theme.of(context).textTheme.headline6,
                     textAlign: TextAlign.justify,
                     overflow: TextOverflow.clip,
@@ -86,23 +86,23 @@ class NewsDetailsNewsListCarousel extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          theNewsListVM.topHeadlines[index].source.name != ""
-                              ? theNewsListVM.topHeadlines[index].source.name
+                          theNewsListVM.articles[index].source.name != ""
+                              ? theNewsListVM.articles[index].source.name
                               .length >=
                               15
                               ? theNewsListVM
-                              .topHeadlines[index].source.name
+                              .articles[index].source.name
                               .substring(0, 15)
                               : theNewsListVM
-                              .topHeadlines[index].source.name
+                              .articles[index].source.name
                               : 'Source inconnue',
                           style: Theme.of(context).textTheme.caption,
                           overflow: TextOverflow.clip,
                         ),
                       ]),
                       Text(
-                        theNewsListVM.topHeadlines[index].publishedAt != ""
-                            ? theNewsListVM.topHeadlines[index].publishedAt
+                        theNewsListVM.articles[index].publishedAt != ""
+                            ? theNewsListVM.articles[index].publishedAt
                             .substring(0, 10)
                             : 'Il y a 15 minutes',
                         style: Theme.of(context).textTheme.caption,
